@@ -64,12 +64,8 @@ public class Seguro {
     }
 
     public String toString() {
-        return "Seguro{" +
-                "codigoSeguro=" + codigoSeguro +
-                ", nome=" + nome +
-                ", tipo=" + tipo +
-                ", descricao=" + descricao +
-                ", valor=" + valor +
-                '}';
+        return "Seguro: " + this.nome + " - Código: " + this.codigoSeguro 
+               + "\nTipo: " + this.tipo + " - Valor: R$ " + this.valor +
+                "\nDescrição: " + this.descricao;
     }
 }
