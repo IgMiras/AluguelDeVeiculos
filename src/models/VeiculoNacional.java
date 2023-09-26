@@ -36,6 +36,14 @@ public class VeiculoNacional extends Veiculo{
         String string = "VeiculoNacional{" + super.toString() + ", taxaImpostoEstadual=" + this.taxaImpostoEstadual + "}";
         return string;
     }
+
+    @Override
+    public float getTaxaImpostoFederal() {
+        // Fui obrigado a implementar por ser metodo abstrato na classe pai
+        // NAO CHAMAR ESTE METODO!
+        // POG (Programação Orientada a Gambiarra)
+        return 0;
+    }
     
     
 }

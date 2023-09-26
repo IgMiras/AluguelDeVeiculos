@@ -17,7 +17,9 @@ public class VeiculoImportado extends Veiculo{
         this.taxaImpostoEstadual = taxaImpostoEstadual;
         this.taxaImpostoFederal = taxaImpostoFederal;
     }
-
+    
+    
+    @Override
     public float getTaxaImpostoEstadual() {
         return taxaImpostoEstadual;
     }

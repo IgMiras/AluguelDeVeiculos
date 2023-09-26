@@ -16,8 +16,8 @@ public class Locacao {
     private int codigoLocacao;
     private int codigoCliente;
     private int codigoFuncionario;
-
-    private Veiculo veiculo;
+    private int codigoVeiculo;
+    
     private LocalDate dataLocacao;
     private LocalDate dataDevolucao;
     private float valorTotal;
@@ -25,15 +25,15 @@ public class Locacao {
     private ArrayList<Seguro> segurosContratados;
     private boolean finalizada;
 
-    public Locacao(int codigoLocacao, int codigoCliente, int codigoFuncionario, Veiculo veiculo, LocalDate dataLocacao, LocalDate dataDevolucao, float valorTotal, String tipoPagamento) {
+    public Locacao(int codigoLocacao, int codigoCliente, int codigoFuncionario, int codigoVeiculo, LocalDate dataLocacao, LocalDate dataDevolucao, float valorTotal, String tipoPagamento) {
         this.codigoLocacao = codigoLocacao;
         this.codigoCliente = codigoCliente;
         this.codigoFuncionario = codigoFuncionario;
-        this.veiculo = veiculo;
+        this.codigoVeiculo = codigoVeiculo;
         this.dataLocacao = dataLocacao;
         this.dataDevolucao = dataDevolucao;
         this.tipoPagamento = tipoPagamento;
-        this.segurosContratados = new ArrayList<Seguro>();
+        this.segurosContratados = new ArrayList<>();
         this.finalizada = false;
     }
 
@@ -47,6 +47,14 @@ public class Locacao {
 
     public int getCodigoCliente() {
         return codigoCliente;
+    }
+
+    public int getCodigoVeiculo() {
+        return codigoVeiculo;
+    }
+
+    public void setCodigoVeiculo(int codigoVeiculo) {
+        this.codigoVeiculo = codigoVeiculo;
     }
 
     public void setCodigoCliente(int codigoCliente) {
@@ -101,7 +109,7 @@ public class Locacao {
         this.segurosContratados = segurosContratados;
     }
 
-    public boolean isFinalizada() {
+    public boolean estaFinalizada() {
         return finalizada;
     }
 
@@ -109,7 +117,7 @@ public class Locacao {
         this.finalizada = finalizada;
     }
 
-    public float calcularValorTotal(){
+    /*public float calcularValorTotal(){
         long diferencaEmDias = Math.abs(this.dataLocacao.toEpochDay() - this.dataDevolucao.toEpochDay());
         float valorSeguros = 0;
         for (Seguro seguro : this.segurosContratados){
@@ -119,11 +127,14 @@ public class Locacao {
         this.valorTotal = valorFinal;
         return valorFinal;
     }
+    
 
     public boolean possuiSeguro(){
         for (Seguro seguro : this.segurosContratados){
             // terminar depois
         }
     }
+    */
+    
 }
 

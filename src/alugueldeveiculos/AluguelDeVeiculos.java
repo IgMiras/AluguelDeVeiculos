@@ -4,6 +4,7 @@
  */
 package alugueldeveiculos;
 
+import connection.Conexao;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.Period;
@@ -18,12 +19,7 @@ public class AluguelDeVeiculos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        LocalDate from = LocalDate.of(2023, 10, 9);
-        LocalDate to = LocalDate.of(2023, 10, 10);
-
-        long daysDifference = Math.abs(from.toEpochDay() - to.toEpochDay());
-
-        System.out.println("Difference in days: " + daysDifference);
+        Conexao.getConexao();
     }
     
 }

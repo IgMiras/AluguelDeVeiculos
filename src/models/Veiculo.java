@@ -139,6 +139,9 @@ public abstract class Veiculo {
     public String toString() {
         return "codigoVeiculo=" + codigoVeiculo + ", nomeModelo=" + nomeModelo + ", montadora=" + montadora + ", anoFabricacao=" + anoFabricacao + ", anoModelo=" + anoModelo + ", placa=" + placa + ", categoria=" + categoria + ", valorFipe=" + valorFipe + ", valorDiaria=" + valorDiaria + ", categoriaCNHNecessaria=" + categoriaCNHNecessaria + ", alugado=" + alugado;
     }
+
+    public abstract float getTaxaImpostoEstadual();
     
+    public abstract float getTaxaImpostoFederal();
     
 }
