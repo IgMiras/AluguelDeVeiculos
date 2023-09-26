@@ -19,7 +19,7 @@ public class AluguelDeVeiculos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Conexao.getConexao();
+         Conexao.getConexao();
     }
     
 }

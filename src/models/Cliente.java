@@ -18,8 +18,8 @@ public class Cliente extends Usuario {
     protected LocalDate validadeCNH;
     protected boolean clienteOuro;
 
-    public Cliente(int codUsuario, String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email, String categoriaCNH, String numeroCNH, String validadeCNH, boolean clienteOuro) {
-        super(codUsuario, nome, cpf, rg, dataNasci, endereco, cep, email);
+    public Cliente(String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email, String categoriaCNH, String numeroCNH, String validadeCNH, boolean clienteOuro) {
+        super(nome, cpf, rg, dataNasci, endereco, cep, email);
         this.categoriaCNH = categoriaCNH;
         this.numeroCNH = numeroCNH;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -4,6 +4,7 @@
  */
 package models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -106,8 +107,14 @@ public class LocadoraDeVeiculos {
     public void setSeguros(ArrayList<Seguro> seguros) {
         this.seguros = seguros;
     }
+    
+    public void addCliente(String nome, String cpf, String rg, LocalDate dataNasci,
+                           String endereco, String cep, String email, String categoriaCNH,
+                           String numeroCNH, LocalDate validadeCNH, boolean clienteOuro){
+        Cliente cliente = new Cliente()
+    }
 
-    public static LocadoraDeVeiculos getInstancia(String aluguelDeVeiculos, String s, String s1, String s2){
+    public static LocadoraDeVeiculos getInstancia(String nome, String endereco, String website, String redeSocial){
         if (instancia == null){
             instancia = new LocadoraDeVeiculos(nome, endereco, website, redeSocial);
         }
