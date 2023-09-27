@@ -7,12 +7,16 @@ package models;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Windows
  */
 public class Locacao {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
+    private static int codigoLocacaoCounter = 1;
     private int codigoLocacao;
     private int codigoCliente;
     private int codigoFuncionario;
@@ -25,13 +29,16 @@ public class Locacao {
     private ArrayList<Seguro> segurosContratados;
     private boolean finalizada;
 
-    public Locacao(int codigoLocacao, int codigoCliente, int codigoFuncionario, int codigoVeiculo, LocalDate dataLocacao, LocalDate dataDevolucao, float valorTotal, String tipoPagamento) {
-        this.codigoLocacao = codigoLocacao;
+    public Locacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao, String dataDevolucao, float valorTotal, String tipoPagamento) {
+        this.codigoLocacao = codigoLocacaoCounter;
+        codigoLocacaoCounter++; // Incrementa o contador para a proxima Locacao
         this.codigoCliente = codigoCliente;
         this.codigoFuncionario = codigoFuncionario;
         this.codigoVeiculo = codigoVeiculo;
-        this.dataLocacao = dataLocacao;
-        this.dataDevolucao = dataDevolucao;
+        LocalDate dataLocacaoAux = LocalDate.parse(dataLocacao, formatter);
+        this.dataLocacao = dataLocacaoAux;
+        LocalDate dataDevolucaoAux = LocalDate.parse(dataDevolucao, formatter);
+        this.dataDevolucao = dataDevolucaoAux;
         this.tipoPagamento = tipoPagamento;
         this.segurosContratados = new ArrayList<>();
         this.finalizada = false;

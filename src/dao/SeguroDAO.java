@@ -16,7 +16,7 @@ import models.Seguro;
  */
 public class SeguroDAO {
     
-    public void create(Seguro seg){
+    public static void create(Seguro seg){
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
         

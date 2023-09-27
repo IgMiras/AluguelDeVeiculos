@@ -19,7 +19,7 @@ import models.Seguro;
  */
 public class LocacaoDAO {
     
-    public void create(Locacao loc){
+    public static void create(Locacao loc){
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
         

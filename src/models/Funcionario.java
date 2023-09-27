@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
  * @author Laís Isabella
  */
 public class Funcionario extends Usuario {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     protected static int codigoFuncionarioCounter = 1;
     protected int codigoFuncionario;
@@ -25,9 +26,8 @@ public class Funcionario extends Usuario {
         codigoFuncionarioCounter++; // Incrementa o contador para o próximo funcionário
         this.salario = salario;
         this.pis = pis;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataOriginal = LocalDate.parse(dataAdmissao, formatter);
-        this.dataAdmissao = dataOriginal;
+        LocalDate dataAdmissaoAux = LocalDate.parse(dataAdmissao, formatter);
+        this.dataAdmissao = dataAdmissaoAux;
     }
 
     @Override

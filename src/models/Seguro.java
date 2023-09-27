@@ -9,14 +9,17 @@ package models;
  * @author Windows
  */
 public class Seguro {
+    
+    private static int codigoSeguroCounter = 1;
     private int codigoSeguro;
     private String nome;
     private String tipo;
     private String descricao;
     private float valor;
 
-    public Seguro(int codigoSeguro, String nome, String tipo, String descricao, float valor) {
-        this.codigoSeguro = codigoSeguro;
+    public Seguro(String nome, String tipo, String descricao, float valor) {
+        this.codigoSeguro = codigoSeguroCounter;
+        codigoSeguroCounter++; // Incrementa o contador para o próximo Seguro
         this.nome = nome;
         this.tipo = tipo;
         this.descricao = descricao;

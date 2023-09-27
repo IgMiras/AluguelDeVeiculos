@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
  * @author Laís Isabella
  */
 public class Usuario {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     // Removi codigoUsuario, pois terá um contador para Clientes e um para Funcionarios
     // Fiz isso porque no BD, existe uma tabela `cliente` e outra `funcionario` com auto-increment
@@ -27,7 +28,6 @@ public class Usuario {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataOriginal = LocalDate.parse(dataNasci, formatter);
         this.dataNasci = dataOriginal;
         this.endereco = endereco;

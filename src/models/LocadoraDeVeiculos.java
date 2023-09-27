@@ -6,6 +6,9 @@ package models;
 
 import dao.ClienteDAO;
 import dao.FuncionarioDAO;
+import dao.LocacaoDAO;
+import dao.SeguroDAO;
+import dao.VeiculoDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -136,21 +139,20 @@ public class LocadoraDeVeiculos {
         Veiculo veic = new VeiculoImportado(nomeModelo, montadora, anoFabricacao, anoModelo,
                                             placa, categoria, valorFipe, valorDiaria, 
                                             categoriaCNHNecessaria, taxaImpostoEstadual, taxaImpostoFederal);
-        ClienteDAO.create(cliente);
+        VeiculoDAO.create(veic);
     }
     
-    public void addCliente(String nome, String cpf, String rg, String dataNasci,
-                           String endereco, String cep, String email, String categoriaCNH,
-                           String numeroCNH, String validadeCNH, boolean clienteOuro){
-        Cliente cliente = new Cliente(nome,cpf,rg,dataNasci,endereco,cep,email,categoriaCNH,numeroCNH,validadeCNH,clienteOuro);
-        ClienteDAO.create(cliente);
+    public void addSeguro(String nome, String tipo, String descricao, float valor){
+        
+        Seguro seguro = new Seguro(nome,tipo,descricao,valor);
+        SeguroDAO.create(seguro);
     }
     
-    public void addCliente(String nome, String cpf, String rg, String dataNasci,
-                           String endereco, String cep, String email, String categoriaCNH,
-                           String numeroCNH, String validadeCNH, boolean clienteOuro){
-        Cliente cliente = new Cliente(nome,cpf,rg,dataNasci,endereco,cep,email,categoriaCNH,numeroCNH,validadeCNH,clienteOuro);
-        ClienteDAO.create(cliente);
+    public void addLocacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao,
+                           String dataDevolucao, float valorTotal, String tipoPagamento){
+        
+        Locacao loc = new Locacao(codigoCliente, codigoFuncionario, codigoVeiculo, dataLocacao, dataDevolucao, valorTotal, tipoPagamento);
+        LocacaoDAO.create(loc);
     }
 
     public static LocadoraDeVeiculos getInstancia(String nome, String endereco, String website, String redeSocial){
