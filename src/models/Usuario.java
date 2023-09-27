@@ -12,7 +12,8 @@ import java.time.format.DateTimeFormatter;
  * @author Laís Isabella
  */
 public class Usuario {
-    protected int codUsuario;
+    // Removi codigoUsuario, pois terá um contador para Clientes e um para Funcionarios
+    // Fiz isso porque no BD, existe uma tabela `cliente` e outra `funcionario` com auto-increment
     protected String nome;
     protected String cpf;
     protected String rg;
@@ -22,7 +23,6 @@ public class Usuario {
     protected String email;
 
     public Usuario(String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email) {
-        this.codUsuario = codUsuario
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
@@ -35,20 +35,12 @@ public class Usuario {
     }
     
     public String toString() {
-		return "Código: " + this.codUsuario + " - Nome: " + this.nome +
+		return "Nome: " + this.nome +
 			   "\n CPF: " + this.cpf + " - RG: " + this.rg +
 			   "\n Data de nascimento: " + this.dataNasci +
                            "\n Endereço: " + this.endereco + " - CEP: " + this.cep +
                            "\nEmail: " + this.email;
 	}
-
-    public int getCodUsuario() {
-        return codUsuario;
-    }
-
-    public void setCodUsuario(int codUsuario) {
-        this.codUsuario = codUsuario;
-    }
 
     public String getNome() {
         return nome;

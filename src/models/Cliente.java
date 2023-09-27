@@ -12,7 +12,9 @@ import java.time.format.DateTimeFormatter;
  * @author Laís Isabella
  */
 public class Cliente extends Usuario {
-
+    
+    protected static int codigoClienteCounter = 1;
+    protected int codigoCliente;
     protected String categoriaCNH;
     protected String numeroCNH;
     protected LocalDate validadeCNH;
@@ -20,6 +22,8 @@ public class Cliente extends Usuario {
 
     public Cliente(String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email, String categoriaCNH, String numeroCNH, String validadeCNH, boolean clienteOuro) {
         super(nome, cpf, rg, dataNasci, endereco, cep, email);
+        this.codigoCliente = codigoClienteCounter;
+        codigoClienteCounter++; // Incrementa o contador para o próximo Cliente
         this.categoriaCNH = categoriaCNH;
         this.numeroCNH = numeroCNH;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

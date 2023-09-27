@@ -12,13 +12,17 @@ import java.time.format.DateTimeFormatter;
  * @author Laís Isabella
  */
 public class Funcionario extends Usuario {
-
+    
+    protected static int codigoFuncionarioCounter = 1;
+    protected int codigoFuncionario;
     protected float salario;
     protected String pis;
     protected LocalDate dataAdmissao;
 
-    public Funcionario(int codUsuario, String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email, float salario, String pis, String dataAdmissao) {
-        super(codUsuario, nome, cpf, rg, dataNasci, endereco, cep, email);
+    public Funcionario(String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email, float salario, String pis, String dataAdmissao) {
+        super(nome, cpf, rg, dataNasci, endereco, cep, email);
+        this.codigoFuncionario = codigoFuncionarioCounter;
+        codigoFuncionarioCounter++; // Incrementa o contador para o próximo funcionário
         this.salario = salario;
         this.pis = pis;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
