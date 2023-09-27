@@ -4,6 +4,8 @@
  */
 package models;
 
+import dao.ClienteDAO;
+import dao.FuncionarioDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -108,10 +110,47 @@ public class LocadoraDeVeiculos {
         this.seguros = seguros;
     }
     
-    public void addCliente(String nome, String cpf, String rg, LocalDate dataNasci,
+    public void addCliente(String nome, String cpf, String rg, String dataNasci,
                            String endereco, String cep, String email, String categoriaCNH,
-                           String numeroCNH, LocalDate validadeCNH, boolean clienteOuro){
-        Cliente cliente = new Cliente()
+                           String numeroCNH, String validadeCNH, boolean clienteOuro){
+        
+        Cliente cliente = new Cliente(nome,cpf,rg,dataNasci,endereco,cep,email,categoriaCNH,numeroCNH,validadeCNH,clienteOuro);
+        ClienteDAO.create(cliente);
+    }
+    
+    public void addFuncionario(String nome, String cpf, String rg, String dataNasci,
+                               String endereco, String cep, String email, float salario,
+                               String pis, String dataAdmissao){
+        
+        Funcionario func = new Funcionario(nome,cpf,rg,dataNasci,endereco,cep,email,salario,pis,dataAdmissao);
+        FuncionarioDAO.create(func);
+    }
+    
+    public void addVeiculo(float taxaImpostoEstadual, float taxaImpostoFederal, 
+                           int codigoVeiculo, String nomeModelo, String montadora,
+                           int anoFabricacao, int anoModelo, String placa, String categoria,
+                           float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
+        
+                        // Instanciando sempre um VeiculoImportado, tanto para nacional quanto importado
+                        // Quando instanciar um Nacional, 
+        Veiculo veic = new VeiculoImportado(nomeModelo, montadora, anoFabricacao, anoModelo,
+                                            placa, categoria, valorFipe, valorDiaria, 
+                                            categoriaCNHNecessaria, taxaImpostoEstadual, taxaImpostoFederal);
+        ClienteDAO.create(cliente);
+    }
+    
+    public void addCliente(String nome, String cpf, String rg, String dataNasci,
+                           String endereco, String cep, String email, String categoriaCNH,
+                           String numeroCNH, String validadeCNH, boolean clienteOuro){
+        Cliente cliente = new Cliente(nome,cpf,rg,dataNasci,endereco,cep,email,categoriaCNH,numeroCNH,validadeCNH,clienteOuro);
+        ClienteDAO.create(cliente);
+    }
+    
+    public void addCliente(String nome, String cpf, String rg, String dataNasci,
+                           String endereco, String cep, String email, String categoriaCNH,
+                           String numeroCNH, String validadeCNH, boolean clienteOuro){
+        Cliente cliente = new Cliente(nome,cpf,rg,dataNasci,endereco,cep,email,categoriaCNH,numeroCNH,validadeCNH,clienteOuro);
+        ClienteDAO.create(cliente);
     }
 
     public static LocadoraDeVeiculos getInstancia(String nome, String endereco, String website, String redeSocial){

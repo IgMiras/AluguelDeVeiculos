@@ -18,7 +18,7 @@ import models.Cliente;
  */
 public class ClienteDAO {
     
-    public void create(Cliente cliente){
+    public static void create(Cliente cliente){
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
         

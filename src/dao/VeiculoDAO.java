@@ -16,7 +16,7 @@ import models.Veiculo;
  */
 public class VeiculoDAO {
     
-    public void create(Veiculo veic){
+    public static void create(Veiculo veic){
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
         

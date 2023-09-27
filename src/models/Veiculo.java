@@ -9,6 +9,8 @@ package models;
  * @author Windows
  */
 public abstract class Veiculo {
+    
+    protected static int codigoVeiculoCounter = 1;
     protected int codigoVeiculo;
     protected String nomeModelo;
     protected String montadora;
@@ -21,8 +23,9 @@ public abstract class Veiculo {
     protected String categoriaCNHNecessaria;
     protected boolean alugado;
 
-    public Veiculo(int codigoVeiculo, String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
-        this.codigoVeiculo = codigoVeiculo;
+    public Veiculo(String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
+        this.codigoVeiculo = codigoVeiculoCounter;
+        codigoVeiculoCounter++; // Incrementa o contador para o próximo Veiculo
         this.nomeModelo = nomeModelo;
         this.montadora = montadora;
         this.anoFabricacao = anoFabricacao;

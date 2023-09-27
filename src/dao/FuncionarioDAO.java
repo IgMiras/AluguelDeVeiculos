@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class FuncionarioDAO {
     
-    public void create(Funcionario func){
+    public static void create(Funcionario func){
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
         

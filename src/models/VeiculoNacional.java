@@ -11,8 +11,8 @@ package models;
 public class VeiculoNacional extends Veiculo{
     protected float taxaImpostoEstadual;
 
-    public VeiculoNacional(float taxaImpostoEstadual, int codigoVeiculo, String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
-        super(codigoVeiculo, nomeModelo, montadora, anoFabricacao, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCNHNecessaria);
+    public VeiculoNacional(String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria, float taxaImpostoEstadual) {
+        super(nomeModelo, montadora, anoFabricacao, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCNHNecessaria);
         this.taxaImpostoEstadual = taxaImpostoEstadual;
     }
 
