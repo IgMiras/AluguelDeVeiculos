@@ -24,7 +24,6 @@ public class VeiculoNacional extends Veiculo{
         this.taxaImpostoEstadual = taxaImpostoEstadual;
     }
 
-    @Override
     public float calcularValorDiaria(){
         // Implementar metodo
         
@@ -37,12 +36,17 @@ public class VeiculoNacional extends Veiculo{
         return string;
     }
 
-    @Override
     public float getTaxaImpostoFederal() {
         // Fui obrigado a implementar por ser metodo abstrato na classe pai
         // NAO CHAMAR ESTE METODO!
         // POG (Programação Orientada a Gambiarra)
         return 0;
+    }
+    
+    public void setTaxaImpostoFederal(float taxaImpostoFederal) {
+        // Fui obrigado a implementar por ser metodo abstrato na classe pai
+        // NAO CHAMAR ESTE METODO!
+        // POG (Programação Orientada a Gambiarra)
     }
     
     

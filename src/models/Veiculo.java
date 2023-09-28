@@ -22,7 +22,9 @@ public abstract class Veiculo {
     protected float valorDiaria;
     protected String categoriaCNHNecessaria;
     protected boolean alugado;
-
+    
+    public Veiculo(){}
+    
     public Veiculo(String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
         this.codigoVeiculo = codigoVeiculoCounter;
         codigoVeiculoCounter++; // Incrementa o contador para o próximo Veiculo
@@ -122,7 +124,7 @@ public abstract class Veiculo {
         this.alugado = alugado;
     }
     
-    public abstract float calcularValorDiaria();
+    //public abstract float calcularValorDiaria();
     
     public boolean estaAlugado(){
         return this.alugado;
@@ -142,9 +144,13 @@ public abstract class Veiculo {
     public String toString() {
         return "codigoVeiculo=" + codigoVeiculo + ", nomeModelo=" + nomeModelo + ", montadora=" + montadora + ", anoFabricacao=" + anoFabricacao + ", anoModelo=" + anoModelo + ", placa=" + placa + ", categoria=" + categoria + ", valorFipe=" + valorFipe + ", valorDiaria=" + valorDiaria + ", categoriaCNHNecessaria=" + categoriaCNHNecessaria + ", alugado=" + alugado;
     }
-
+    
     public abstract float getTaxaImpostoEstadual();
     
     public abstract float getTaxaImpostoFederal();
+    
+    public abstract void setTaxaImpostoEstadual(float taxaImpostoEstadual);
+    
+    public abstract void setTaxaImpostoFederal(float taxaImpostoFederal);
     
 }

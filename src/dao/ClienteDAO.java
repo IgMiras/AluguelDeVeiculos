@@ -8,6 +8,8 @@ import connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Cliente;
@@ -46,6 +48,20 @@ public class ClienteDAO {
             System.out.println("Erro ao salvar cliente: "+ex);
         } finally {
             Conexao.closeConnection(con, stmt);
+        }
+    }
+    
+    
+    // TERMINAR DE IMPLEMENTAR METODO
+    public ArrayList<Cliente> read(){
+        Connection con = Conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = con.prepareStatement("");
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

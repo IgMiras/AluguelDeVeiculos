@@ -12,6 +12,8 @@ public class VeiculoImportado extends Veiculo{
     protected float taxaImpostoEstadual;
     protected float taxaImpostoFederal;
 
+    public VeiculoImportado() {}
+    
     public VeiculoImportado(String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria, float taxaImpostoEstadual, float taxaImpostoFederal) {
         super(nomeModelo, montadora, anoFabricacao, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCNHNecessaria);
         this.taxaImpostoEstadual = taxaImpostoEstadual;
@@ -19,7 +21,6 @@ public class VeiculoImportado extends Veiculo{
     }
     
     
-    @Override
     public float getTaxaImpostoEstadual() {
         return taxaImpostoEstadual;
     }
@@ -36,7 +37,6 @@ public class VeiculoImportado extends Veiculo{
         this.taxaImpostoFederal = taxaImpostoFederal;
     }
 
-    @Override
     public float calcularValorDiaria(){
         // Implementar metodo
         
