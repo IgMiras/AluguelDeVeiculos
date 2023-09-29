@@ -10,9 +10,11 @@ package models;
  */
 public class VeiculoNacional extends Veiculo{
     protected float taxaImpostoEstadual;
-
-    public VeiculoNacional(String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria, float taxaImpostoEstadual) {
-        super(nomeModelo, montadora, anoFabricacao, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCNHNecessaria);
+    
+    public VeiculoNacional(){}
+    
+    public VeiculoNacional(String tipoVeiculo, String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria, float taxaImpostoEstadual) {
+        super(tipoVeiculo, nomeModelo, montadora, anoFabricacao, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCNHNecessaria);
         this.taxaImpostoEstadual = taxaImpostoEstadual;
     }
 
@@ -36,19 +38,18 @@ public class VeiculoNacional extends Veiculo{
         return string;
     }
 
+    @Override
     public float getTaxaImpostoFederal() {
-        // Fui obrigado a implementar por ser metodo abstrato na classe pai
-        // NAO CHAMAR ESTE METODO!
-        // POG (Programação Orientada a Gambiarra)
+        // Fui obrigado a implementar por ser abstract na classe pai
+        // NAO USAR!
         return 0;
     }
-    
+
+    @Override
     public void setTaxaImpostoFederal(float taxaImpostoFederal) {
-        // Fui obrigado a implementar por ser metodo abstrato na classe pai
-        // NAO CHAMAR ESTE METODO!
-        // POG (Programação Orientada a Gambiarra)
+        // Fui obrigado a implementar por ser abstract na classe pai
+        // NAO USAR!
     }
-    
     
 }
 

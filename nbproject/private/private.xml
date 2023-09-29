@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/models/Usuario.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/models/Veiculo.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/models/VeiculoImportado.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/models/Cliente.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/dao/LocacaoDAO.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/models/Funcionario.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/dao/ClienteDAO.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/dao/VeiculoDAO.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/models/VeiculoNacional.java</file>
+            <file>file:/C:/Users/Windows/Documents/IgMiras/AluguelDeVeiculos/src/dao/FuncionarioDAO.java</file>
+        </group>
     </open-files>
 </project-private>

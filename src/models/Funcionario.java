@@ -19,7 +19,9 @@ public class Funcionario extends Usuario {
     protected float salario;
     protected String pis;
     protected LocalDate dataAdmissao;
-
+    
+    public Funcionario(){}
+    
     public Funcionario(String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email, float salario, String pis, String dataAdmissao) {
         super(nome, cpf, rg, dataNasci, endereco, cep, email);
         this.codigoFuncionario = codigoFuncionarioCounter;

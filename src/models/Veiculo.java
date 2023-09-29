@@ -22,10 +22,12 @@ public abstract class Veiculo {
     protected float valorDiaria;
     protected String categoriaCNHNecessaria;
     protected boolean alugado;
+    protected String tipoVeiculo;
     
     public Veiculo(){}
     
-    public Veiculo(String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
+    public Veiculo(String tipoVeiculo,String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
+        this.tipoVeiculo = tipoVeiculo;
         this.codigoVeiculo = codigoVeiculoCounter;
         codigoVeiculoCounter++; // Incrementa o contador para o próximo Veiculo
         this.nomeModelo = nomeModelo;
@@ -40,6 +42,14 @@ public abstract class Veiculo {
         this.alugado = false;
     }
 
+    public String getTipoVeiculo() {
+        return tipoVeiculo;
+    }
+
+    public void setTipoVeiculo(String tipoVeiculo) {
+        this.tipoVeiculo = tipoVeiculo;
+    }
+    
     public int getCodigoVeiculo() {
         return codigoVeiculo;
     }

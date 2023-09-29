@@ -24,6 +24,8 @@ public class Usuario {
     protected String cep;
     protected String email;
 
+    public Usuario(){}
+    
     public Usuario(String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email) {
         this.nome = nome;
         this.cpf = cpf;

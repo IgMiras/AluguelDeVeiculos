@@ -8,7 +8,11 @@ import models.Funcionario;
 import connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,6 +48,42 @@ public class FuncionarioDAO {
         } finally {
             Conexao.closeConnection(con, stmt);
         }
+    }
+    
+    public ArrayList<Funcionario> listarTodosFuncionarios(){
+        Connection con = Conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Funcionario func = new Funcionario();
+                
+                func.setNome(rs.getString("nome"));
+                func.setCpf(rs.getString("cpf"));
+                func.setRg(rs.getString("rg"));
+                func.setDataNasci(rs.getDate("dataNascimento").toLocalDate()); 
+                func.setEndereco(rs.getString("endereco"));
+                func.setCep(rs.getString("cep"));
+                func.setEmail(rs.getString("email"));
+                func.setSalario(rs.getFloat("salario"));
+                func.setPis(rs.getString("pis"));
+                func.setDataAdmissao(rs.getDate("dataAdmissao").toLocalDate());
+                funcionarios.add(func);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        
+        return funcionarios;
     }
     
 }

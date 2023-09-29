@@ -19,7 +19,9 @@ public class Cliente extends Usuario {
     protected String numeroCNH;
     protected LocalDate validadeCNH;
     protected boolean clienteOuro;
-
+    
+    public Cliente(){}
+    
     public Cliente(String nome, String cpf, String rg, String dataNasci, String endereco, String cep, String email, String categoriaCNH, String numeroCNH, String validadeCNH, boolean clienteOuro) {
         super(nome, cpf, rg, dataNasci, endereco, cep, email);
         this.codigoCliente = codigoClienteCounter;
