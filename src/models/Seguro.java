@@ -16,6 +16,8 @@ public class Seguro {
     private String tipo;
     private String descricao;
     private float valor;
+    
+    public Seguro(){}
 
     public Seguro(String nome, String tipo, String descricao, float valor) {
         this.codigoSeguro = codigoSeguroCounter;

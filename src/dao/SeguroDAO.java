@@ -7,7 +7,12 @@ package dao;
 import connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Seguro;
 
 /**
@@ -38,6 +43,38 @@ public class SeguroDAO {
         } finally {
             Conexao.closeConnection(con, stmt);
         }
+    }
+    
+    public ArrayList<Seguro> listarTodosSeguros() {
+        Connection con = Conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Seguro> seguros = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM seguro");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Seguro seg = new Seguro();
+                
+                seg.setNome(rs.getString("nome"));
+                seg.setCodigoSeguro(rs.getInt("idseguro"));
+                seg.setNome(rs.getString("nome"));
+                seg.setTipo(rs.getString("tipo"));
+                seg.setDescricao(rs.getString("descricao"));
+                seg.setValor(rs.getFloat("valor"));
+                
+                seguros.add(seg);
+            }
+        } catch (SQLException ex) {
+             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return seguros;
     }
     
 }

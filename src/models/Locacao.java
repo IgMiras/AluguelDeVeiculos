@@ -20,7 +20,7 @@ public class Locacao {
     private int codigoLocacao;
     private int codigoCliente;
     private int codigoFuncionario;
-    private int codigoVeiculo;
+    private Veiculo veiculo;
     
     private LocalDate dataLocacao;
     private LocalDate dataDevolucao;
@@ -28,13 +28,15 @@ public class Locacao {
     private String tipoPagamento;
     private ArrayList<Seguro> segurosContratados;
     private boolean finalizada;
-
-    public Locacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao, String dataDevolucao, float valorTotal, String tipoPagamento) {
+    
+    public Locacao(){}
+    
+    public Locacao(int codigoCliente, int codigoFuncionario, Veiculo veiculo, String dataLocacao, String dataDevolucao, float valorTotal, String tipoPagamento) {
         this.codigoLocacao = codigoLocacaoCounter;
         codigoLocacaoCounter++; // Incrementa o contador para a proxima Locacao
         this.codigoCliente = codigoCliente;
         this.codigoFuncionario = codigoFuncionario;
-        this.codigoVeiculo = codigoVeiculo;
+        this.veiculo = veiculo;
         LocalDate dataLocacaoAux = LocalDate.parse(dataLocacao, formatter);
         this.dataLocacao = dataLocacaoAux;
         LocalDate dataDevolucaoAux = LocalDate.parse(dataDevolucao, formatter);
@@ -56,12 +58,12 @@ public class Locacao {
         return codigoCliente;
     }
 
-    public int getCodigoVeiculo() {
-        return codigoVeiculo;
+    public Veiculo getVeiculo() {
+        return this.veiculo;
     }
 
-    public void setCodigoVeiculo(int codigoVeiculo) {
-        this.codigoVeiculo = codigoVeiculo;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     public void setCodigoCliente(int codigoCliente) {
@@ -124,7 +126,7 @@ public class Locacao {
         this.finalizada = finalizada;
     }
 
-    /*public float calcularValorTotal(){
+    public float calcularValorTotal(){
         long diferencaEmDias = Math.abs(this.dataLocacao.toEpochDay() - this.dataDevolucao.toEpochDay());
         float valorSeguros = 0;
         for (Seguro seguro : this.segurosContratados){

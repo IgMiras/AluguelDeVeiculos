@@ -86,4 +86,53 @@ public class FuncionarioDAO {
         return funcionarios;
     }
     
+    public ArrayList<Funcionario> listarFuncionariosDoMes(){
+        Connection con = Conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("""
+                                        WITH ranked_locacoes AS (
+                                            SELECT
+                                                f.nome AS nome_funcionario,
+                                                MONTH(l.data_locacao) AS mes,
+                                                COUNT(*) AS total_locacoes,
+                                                DENSE_RANK() OVER (PARTITION BY MONTH(l.data_locacao) ORDER BY COUNT(*) DESC) AS ranking
+                                            FROM locacao l
+                                            INNER JOIN funcionario f ON l.idfuncionario = f.idfuncionario
+                                            GROUP BY nome_funcionario, mes
+                                        )
+                                        SELECT nome_funcionario, mes, total_locacoes
+                                        FROM ranked_locacoes
+                                        WHERE ranking = 1;""");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Funcionario func = new Funcionario();
+                
+                func.setNome(rs.getString("nome"));
+                func.setCpf(rs.getString("cpf"));
+                func.setRg(rs.getString("rg"));
+                func.setDataNasci(rs.getDate("dataNascimento").toLocalDate()); 
+                func.setEndereco(rs.getString("endereco"));
+                func.setCep(rs.getString("cep"));
+                func.setEmail(rs.getString("email"));
+                func.setSalario(rs.getFloat("salario"));
+                func.setPis(rs.getString("pis"));
+                func.setDataAdmissao(rs.getDate("dataAdmissao").toLocalDate());
+                funcionarios.add(func);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        
+        return funcionarios;
+    }
+    
 }

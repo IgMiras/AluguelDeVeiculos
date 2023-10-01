@@ -381,10 +381,11 @@ public class VeiculoDAO {
         ArrayList<Veiculo> veiculos = new ArrayList<>();
         
         try {
-            stmt = con.prepareStatement("SELECT v.*\n" +
-                                        "FROM veiculo v\n" +
-                                        "JOIN locacao l ON v.idveiculo = l.idveiculo\n" +
-                                        "WHERE l.data_devolucao < CURRENT_DATE() AND l.finalizada = 0;"); 
+            stmt = con.prepareStatement("""
+                                        SELECT v.*
+                                        FROM veiculo v
+                                        JOIN locacao l ON v.idveiculo = l.idveiculo
+                                        WHERE l.data_devolucao < CURRENT_DATE() AND l.finalizada = 0;"""); 
             rs = stmt.executeQuery();
             
             while(rs.next()){

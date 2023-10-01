@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import models.Locacao;
 import java.util.ArrayList;
 import models.Seguro;
+import models.Veiculo;
 
 /**
  *
@@ -65,5 +66,60 @@ public class LocacaoDAO {
             Conexao.closeConnection(con, stmt);
         }
     }
+    
+    public ArrayList<Locacao> listarTodasLocacoesClienteEspecifico(int codigoCliente) {
+        Connection con = Conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("""
+                                        SELECT
+                                            locacao.idlocacao,
+                                            locacao.data_locacao,
+                                            locacao.data_devolucao,
+                                            locacao.valor_total,
+                                            locacao.tipo_pagamento,
+                                            locacao.finalizada,
+                                            veiculo.idveiculo,
+                                            veiculo.tipoVeiculo,
+                                            veiculo.nomeModelo,
+                                            veiculo.montadora,
+                                            veiculo.anoFabricacao,
+                                            veiculo.anoModelo,
+                                            veiculo.placa,
+                                            veiculo.categoria,
+                                            veiculo.valorFipe,
+                                            veiculo.valorDiaria,
+                                            veiculo.categoriaCNHNecessaria,
+                                            veiculo.alugado,
+                                            veiculo.taxaImpostoEstadual
+                                        FROM
+                                            locacao
+                                        INNER JOIN veiculo ON locacao.idveiculo = veiculo.idveiculo
+                                        WHERE
+                                            locacao.idcliente = [ID_DO_CLIENTE];""");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Locacao loc = new Locacao();
+                loc.setCodigoLocacao(rs.getInt("idlocacao"));
+                loc.setDataLocacao(rs.getDate("data_locacao").toLocalDate());
+                loc.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                loc.setValorTotal();
+                if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    
+                }
+            }
+        } catch (SQLException ex) {
+             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return clientes;
+    
     
 }
