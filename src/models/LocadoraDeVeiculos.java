@@ -129,16 +129,27 @@ public class LocadoraDeVeiculos {
         FuncionarioDAO.create(func);
     }
     
-    public void addVeiculo(float taxaImpostoEstadual, float taxaImpostoFederal, 
-                           int codigoVeiculo, String nomeModelo, String montadora,
-                           int anoFabricacao, int anoModelo, String placa, String categoria,
-                           float valorFipe, float valorDiaria, String categoriaCNHNecessaria) {
+    public void addVeiculoImportado(String tipoVeiculo,String nomeModelo, String montadora,
+                                    int anoFabricacao, int anoModelo, String placa, String categoria,
+                                    float valorFipe, float valorDiaria, String categoriaCNHNecessaria,
+                                    float taxaImpostoEstadual, float taxaImpostoFederal) {
         
-                        // Instanciando sempre um VeiculoImportado, tanto para nacional quanto importado
-                        // Quando instanciar um Nacional, 
-        Veiculo veic = new VeiculoImportado(nomeModelo, montadora, anoFabricacao, anoModelo,
+                         
+        Veiculo veic = new VeiculoImportado(tipoVeiculo, nomeModelo, montadora, anoFabricacao, anoModelo,
                                             placa, categoria, valorFipe, valorDiaria, 
                                             categoriaCNHNecessaria, taxaImpostoEstadual, taxaImpostoFederal);
+        VeiculoDAO.create(veic);
+    }
+    
+    public void addVeiculoNacional(String tipoVeiculo,String nomeModelo, String montadora,
+                                    int anoFabricacao, int anoModelo, String placa, String categoria,
+                                    float valorFipe, float valorDiaria, String categoriaCNHNecessaria,
+                                    float taxaImpostoEstadual) {
+        
+                         
+        Veiculo veic = new VeiculoNacional(tipoVeiculo, nomeModelo, montadora, anoFabricacao, anoModelo,
+                                            placa, categoria, valorFipe, valorDiaria, 
+                                            categoriaCNHNecessaria, taxaImpostoEstadual);
         VeiculoDAO.create(veic);
     }
     
@@ -149,9 +160,10 @@ public class LocadoraDeVeiculos {
     }
     
     public void addLocacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao,
-                           String dataDevolucao, float valorTotal, String tipoPagamento){
+                           String dataDevolucao, float valorTotal, String tipoPagamento, ArrayList<Seguro> segurosContratados){
         
-        Locacao loc = new Locacao(codigoCliente, codigoFuncionario, codigoVeiculo, dataLocacao, dataDevolucao, valorTotal, tipoPagamento);
+        Veiculo veic = VeiculoDAO.buscarVeiculo(codigoVeiculo);
+        Locacao loc = new Locacao(codigoCliente, codigoFuncionario, veic, dataLocacao, dataDevolucao, valorTotal, tipoPagamento, segurosContratados);
         LocacaoDAO.create(loc);
     }
 

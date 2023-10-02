@@ -42,7 +42,11 @@ public class VeiculoDAO {
             stmt.setString(10, veic.getCategoriaCNHNecessaria());
             stmt.setBoolean(11, veic.estaAlugado());
             stmt.setFloat(12, veic.getTaxaImpostoEstadual());
-            stmt.setFloat(13, veic.getTaxaImpostoFederal());
+            if (veic.getTipoVeiculo().toLowerCase().contains("importado")){
+                stmt.setFloat(13, veic.getTaxaImpostoFederal());
+            } else {
+                stmt.setFloat(13, 0);
+            }
             
             stmt.executeUpdate();
             
@@ -434,6 +438,63 @@ public class VeiculoDAO {
         }
         
         return veiculos;
+    }
+    
+    public static Veiculo buscarVeiculo(int codigoVeiculo){
+        Connection con = Conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM veiculo WHERE idveiculo = ?");
+            stmt.setInt(1,codigoVeiculo);
+            rs = stmt.executeQuery();
+            
+            if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    Veiculo veic = new VeiculoNacional();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                    return veic;
+            }
+            
+            if (rs.getString("tipoVeiculo").toLowerCase().contains("importado")){
+                Veiculo veic = new VeiculoImportado();
+                
+                veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                veic.setNomeModelo(rs.getString("nomeModelo"));
+                veic.setMontadora(rs.getString("montadora"));
+                veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                veic.setAnoModelo(rs.getInt("anoModelo"));
+                veic.setPlaca(rs.getString("placa"));
+                veic.setCategoria(rs.getString("categoria"));
+                veic.setValorFipe(rs.getFloat("valorFipe"));
+                veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                veic.setAlugado(rs.getBoolean("alugado"));
+                veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                veic.setTaxaImpostoFederal(rs.getFloat("taxaImpostoFederal"));
+                return veic;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        return null;
     }
     
 }

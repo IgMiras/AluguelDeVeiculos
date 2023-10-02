@@ -31,7 +31,7 @@ public class Locacao {
     
     public Locacao(){}
     
-    public Locacao(int codigoCliente, int codigoFuncionario, Veiculo veiculo, String dataLocacao, String dataDevolucao, float valorTotal, String tipoPagamento) {
+    public Locacao(int codigoCliente, int codigoFuncionario, Veiculo veiculo, String dataLocacao, String dataDevolucao, float valorTotal, String tipoPagamento, ArrayList<Seguro> segurosContratados) {
         this.codigoLocacao = codigoLocacaoCounter;
         codigoLocacaoCounter++; // Incrementa o contador para a proxima Locacao
         this.codigoCliente = codigoCliente;
@@ -42,10 +42,15 @@ public class Locacao {
         LocalDate dataDevolucaoAux = LocalDate.parse(dataDevolucao, formatter);
         this.dataDevolucao = dataDevolucaoAux;
         this.tipoPagamento = tipoPagamento;
-        this.segurosContratados = new ArrayList<>();
+        this.segurosContratados = segurosContratados;
         this.finalizada = false;
+        calcularValorTotal();
     }
-
+    
+    public int getCodigoVeiculo(){
+        return this.veiculo.getCodigoVeiculo();
+    }
+    
     public int getCodigoLocacao() {
         return codigoLocacao;
     }
@@ -139,11 +144,22 @@ public class Locacao {
     
 
     public boolean possuiSeguro(){
-        for (Seguro seguro : this.segurosContratados){
-            // terminar depois
-        }
+        return !this.segurosContratados.isEmpty();
     }
-    */
+    
+    public boolean verificarAtraso(){
+        if (LocalDate.now().isAfter(this.dataDevolucao) && this.finalizada == false){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Locacao{" + "formatter=" + formatter + ", codigoLocacao=" + codigoLocacao + ", codigoCliente=" + codigoCliente + ", codigoFuncionario=" + codigoFuncionario + ", veiculo=" + veiculo + ", dataLocacao=" + dataLocacao + ", dataDevolucao=" + dataDevolucao + ", valorTotal=" + valorTotal + ", tipoPagamento=" + tipoPagamento + ", segurosContratados=" + segurosContratados + ", finalizada=" + finalizada + '}';
+    }
+    
+    
     
 }
 
