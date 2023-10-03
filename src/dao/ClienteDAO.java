@@ -19,9 +19,10 @@ import models.Cliente;
  * @author alunos
  */
 public class ClienteDAO {
+    private Conexao conexao = new Conexao();
     
-    public static void create(Cliente cliente){
-        Connection con = Conexao.getConexao();
+    public void create(Cliente cliente){
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         
         try {
@@ -53,7 +54,7 @@ public class ClienteDAO {
     
     
    public ArrayList<Cliente> listarClientesAlugaramVeiculoEspecifico(int codigoVeiculo) {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -90,7 +91,7 @@ public class ClienteDAO {
     }
    
    public ArrayList<Cliente> listarTodosClientes() {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -126,7 +127,7 @@ public class ClienteDAO {
     }
    
     public ArrayList<Cliente> listarClientesLocacaoAtraso() {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -163,5 +164,39 @@ public class ClienteDAO {
         }
 
         return clientes;
+    }
+    
+    public Cliente buscarClientePorID(int codigoCliente) {
+        Connection con = conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM cliente WHERE idcliente = ?");
+            stmt.setInt(1,codigoCliente);
+            rs = stmt.executeQuery();
+            
+            Cliente cliente = new Cliente();
+                
+            cliente.setNome(rs.getString("nome"));
+            cliente.setCpf(rs.getString("cpf"));
+            cliente.setRg(rs.getString("rg"));
+            cliente.setDataNasci(rs.getDate("dataNascimento").toLocalDate());
+            cliente.setEndereco(rs.getString("endereco"));
+            cliente.setCep(rs.getString("cep"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setCategoriaCNH(rs.getString("categoriaCNH"));
+            cliente.setNumeroCNH(rs.getString("numeroCNH"));
+            cliente.setValidadeCNH(rs.getDate("validadeCNH").toLocalDate());
+            cliente.setClienteOuro(rs.getBoolean("clienteOuro"));
+            
+            return cliente;
+        } catch (SQLException ex) {
+             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        
+        return null;
     }
 }

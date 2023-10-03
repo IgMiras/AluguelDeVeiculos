@@ -23,9 +23,10 @@ import models.VeiculoNacional;
  * @author alunos
  */
 public class LocacaoDAO {
+    private Conexao conexao = new Conexao();
     
-    public static void create(Locacao loc){
-        Connection con = Conexao.getConexao();
+    public void create(Locacao loc){
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         
         try {
@@ -72,7 +73,7 @@ public class LocacaoDAO {
     }
     
     public ArrayList<Locacao> listarTodasLocacoesClienteEspecifico(int codigoCliente) {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -184,7 +185,7 @@ public class LocacaoDAO {
     }
     
     public ArrayList<Locacao> listarTodasLocacoes() {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -294,7 +295,7 @@ public class LocacaoDAO {
     }
     
     public ArrayList<Locacao> listarTodasLocacoesMesEspecifico(int mes) {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -397,7 +398,7 @@ public class LocacaoDAO {
     }
     
     public ArrayList<Locacao> lucroTotalMesEspecifico(int mes) {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -413,6 +414,683 @@ public class LocacaoDAO {
                                         WHERE
                                             MONTH(data_locacao) = ?""");
             stmt.setInt(1, mes);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Locacao loc = new Locacao();
+                loc.setCodigoLocacao(rs.getInt("idlocacao"));
+                loc.setCodigoCliente(rs.getInt("idcliente"));
+                loc.setCodigoFuncionario(rs.getInt("idfuncionario"));
+                
+                Veiculo veic;
+                if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    veic = new VeiculoNacional();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                } else {
+                    veic = new VeiculoImportado();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                    veic.setTaxaImpostoFederal(rs.getFloat("taxaImpostoFederal"));
+                }
+                
+                loc.setVeiculo(veic);
+                loc.setDataLocacao(rs.getDate("data_locacao").toLocalDate());
+                loc.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                loc.setTipoPagamento(rs.getString("tipo_pagamento"));
+                loc.setFinalizada(rs.getBoolean("finalizada"));
+                
+                
+                stmt = con.prepareStatement("""
+                                            SELECT seguro.*
+                                            FROM locacao_seguro
+                                            JOIN seguro ON locacao_seguro.idseguro = seguro.idseguro
+                                            WHERE locacao_seguro.idlocacao = ?""");
+                stmt.setInt(1, rs.getInt("idlocacao"));
+                rs = stmt.executeQuery();
+                
+                ArrayList<Seguro> seguros = new ArrayList<>();
+                while (rs.next()){
+                    Seguro seg = new Seguro();
+                    seg.setCodigoSeguro(rs.getInt("idseguro"));
+                    seg.setNome(rs.getString("nome"));
+                    seg.setTipo(rs.getString("tipo"));
+                    seg.setDescricao(rs.getString("descricao"));
+                    seg.setValor(rs.getFloat("valor"));
+                    seguros.add(seg);
+                }    
+                
+                loc.setSegurosContratados(seguros);
+                loc.setValorTotal(rs.getFloat("valor_total"));
+                
+                locacoes.add(loc);
+            }    
+            
+        } catch (SQLException ex) {
+             System.out.println("ERRO NA BUSCA!");
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return locacoes;
+    
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesFinalizadas() {
+        Connection con = conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<>();
+        
+        try {
+            
+            stmt = con.prepareStatement("""
+                                        SELECT
+                                            locacao.idlocacao,
+                                            locacao.idcliente,
+                                            veiculo.*,
+                                            locacao.data_locacao,
+                                            locacao.data_devolucao,
+                                            locacao.valor_total,
+                                            locacao.tipo_pagamento,
+                                            locacao.finalizada,
+                                            locacao.idfuncionario
+                                        FROM
+                                            locacao
+                                        JOIN
+                                            veiculo ON locacao.idveiculo = veiculo.idveiculo
+                                        WHERE
+                                            locacao.finalizada = 1""");
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Locacao loc = new Locacao();
+                loc.setCodigoLocacao(rs.getInt("idlocacao"));
+                loc.setCodigoCliente(rs.getInt("idcliente"));
+                loc.setCodigoFuncionario(rs.getInt("idfuncionario"));
+                
+                Veiculo veic;
+                if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    veic = new VeiculoNacional();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                } else {
+                    veic = new VeiculoImportado();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                    veic.setTaxaImpostoFederal(rs.getFloat("taxaImpostoFederal"));
+                }
+                
+                loc.setVeiculo(veic);
+                loc.setDataLocacao(rs.getDate("data_locacao").toLocalDate());
+                loc.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                loc.setTipoPagamento(rs.getString("tipo_pagamento"));
+                loc.setFinalizada(rs.getBoolean("finalizada"));
+                
+                
+                stmt = con.prepareStatement("""
+                                            SELECT seguro.*
+                                            FROM locacao_seguro
+                                            JOIN seguro ON locacao_seguro.idseguro = seguro.idseguro
+                                            WHERE locacao_seguro.idlocacao = ?""");
+                stmt.setInt(1, rs.getInt("idlocacao"));
+                rs = stmt.executeQuery();
+                
+                ArrayList<Seguro> seguros = new ArrayList<>();
+                while (rs.next()){
+                    Seguro seg = new Seguro();
+                    seg.setCodigoSeguro(rs.getInt("idseguro"));
+                    seg.setNome(rs.getString("nome"));
+                    seg.setTipo(rs.getString("tipo"));
+                    seg.setDescricao(rs.getString("descricao"));
+                    seg.setValor(rs.getFloat("valor"));
+                    seguros.add(seg);
+                }    
+                
+                loc.setSegurosContratados(seguros);
+                loc.setValorTotal(rs.getFloat("valor_total"));
+                
+                locacoes.add(loc);
+            }    
+            
+        } catch (SQLException ex) {
+             System.out.println("ERRO NA BUSCA!");
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return locacoes;
+    
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadas() {
+        Connection con = conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<>();
+        
+        try {
+            
+            stmt = con.prepareStatement("""
+                                        SELECT
+                                            locacao.idlocacao,
+                                            locacao.idcliente,
+                                            veiculo.*,
+                                            locacao.data_locacao,
+                                            locacao.data_devolucao,
+                                            locacao.valor_total,
+                                            locacao.tipo_pagamento,
+                                            locacao.finalizada,
+                                            locacao.idfuncionario
+                                        FROM
+                                            locacao
+                                        JOIN
+                                            veiculo ON locacao.idveiculo = veiculo.idveiculo
+                                        WHERE
+                                            locacao.finalizada = 0""");
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Locacao loc = new Locacao();
+                loc.setCodigoLocacao(rs.getInt("idlocacao"));
+                loc.setCodigoCliente(rs.getInt("idcliente"));
+                loc.setCodigoFuncionario(rs.getInt("idfuncionario"));
+                
+                Veiculo veic;
+                if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    veic = new VeiculoNacional();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                } else {
+                    veic = new VeiculoImportado();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                    veic.setTaxaImpostoFederal(rs.getFloat("taxaImpostoFederal"));
+                }
+                
+                loc.setVeiculo(veic);
+                loc.setDataLocacao(rs.getDate("data_locacao").toLocalDate());
+                loc.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                loc.setTipoPagamento(rs.getString("tipo_pagamento"));
+                loc.setFinalizada(rs.getBoolean("finalizada"));
+                
+                
+                stmt = con.prepareStatement("""
+                                            SELECT seguro.*
+                                            FROM locacao_seguro
+                                            JOIN seguro ON locacao_seguro.idseguro = seguro.idseguro
+                                            WHERE locacao_seguro.idlocacao = ?""");
+                stmt.setInt(1, rs.getInt("idlocacao"));
+                rs = stmt.executeQuery();
+                
+                ArrayList<Seguro> seguros = new ArrayList<>();
+                while (rs.next()){
+                    Seguro seg = new Seguro();
+                    seg.setCodigoSeguro(rs.getInt("idseguro"));
+                    seg.setNome(rs.getString("nome"));
+                    seg.setTipo(rs.getString("tipo"));
+                    seg.setDescricao(rs.getString("descricao"));
+                    seg.setValor(rs.getFloat("valor"));
+                    seguros.add(seg);
+                }    
+                
+                loc.setSegurosContratados(seguros);
+                loc.setValorTotal(rs.getFloat("valor_total"));
+                
+                locacoes.add(loc);
+            }    
+            
+        } catch (SQLException ex) {
+             System.out.println("ERRO NA BUSCA!");
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return locacoes;
+    
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadasVeiculosNacionais() {
+        Connection con = conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<>();
+        
+        try {
+            
+            stmt = con.prepareStatement("""
+                                        SELECT
+                                            locacao.idlocacao,
+                                            locacao.idcliente,
+                                            veiculo.*,
+                                            locacao.data_locacao,
+                                            locacao.data_devolucao,
+                                            locacao.valor_total,
+                                            locacao.tipo_pagamento,
+                                            locacao.finalizada,
+                                            locacao.idfuncionario
+                                        FROM
+                                            locacao
+                                        JOIN
+                                            veiculo ON locacao.idveiculo = veiculo.idveiculo
+                                        WHERE
+                                            locacao.finalizada = 0
+                                            AND veiculo.tipoVeiculo = 'nacional'""");
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Locacao loc = new Locacao();
+                loc.setCodigoLocacao(rs.getInt("idlocacao"));
+                loc.setCodigoCliente(rs.getInt("idcliente"));
+                loc.setCodigoFuncionario(rs.getInt("idfuncionario"));
+                
+                Veiculo veic;
+                if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    veic = new VeiculoNacional();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                } else {
+                    veic = new VeiculoImportado();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                    veic.setTaxaImpostoFederal(rs.getFloat("taxaImpostoFederal"));
+                }
+                
+                loc.setVeiculo(veic);
+                loc.setDataLocacao(rs.getDate("data_locacao").toLocalDate());
+                loc.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                loc.setTipoPagamento(rs.getString("tipo_pagamento"));
+                loc.setFinalizada(rs.getBoolean("finalizada"));
+                
+                
+                stmt = con.prepareStatement("""
+                                            SELECT seguro.*
+                                            FROM locacao_seguro
+                                            JOIN seguro ON locacao_seguro.idseguro = seguro.idseguro
+                                            WHERE locacao_seguro.idlocacao = ?""");
+                stmt.setInt(1, rs.getInt("idlocacao"));
+                rs = stmt.executeQuery();
+                
+                ArrayList<Seguro> seguros = new ArrayList<>();
+                while (rs.next()){
+                    Seguro seg = new Seguro();
+                    seg.setCodigoSeguro(rs.getInt("idseguro"));
+                    seg.setNome(rs.getString("nome"));
+                    seg.setTipo(rs.getString("tipo"));
+                    seg.setDescricao(rs.getString("descricao"));
+                    seg.setValor(rs.getFloat("valor"));
+                    seguros.add(seg);
+                }    
+                
+                loc.setSegurosContratados(seguros);
+                loc.setValorTotal(rs.getFloat("valor_total"));
+                
+                locacoes.add(loc);
+            }    
+            
+        } catch (SQLException ex) {
+             System.out.println("ERRO NA BUSCA!");
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return locacoes;
+    
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadasVeiculosImportados() {
+        Connection con = conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<>();
+        
+        try {
+            
+            stmt = con.prepareStatement("""
+                                        SELECT
+                                            locacao.idlocacao,
+                                            locacao.idcliente,
+                                            veiculo.*,
+                                            locacao.data_locacao,
+                                            locacao.data_devolucao,
+                                            locacao.valor_total,
+                                            locacao.tipo_pagamento,
+                                            locacao.finalizada,
+                                            locacao.idfuncionario
+                                        FROM
+                                            locacao
+                                        JOIN
+                                            veiculo ON locacao.idveiculo = veiculo.idveiculo
+                                        WHERE
+                                            locacao.finalizada = 0
+                                            AND veiculo.tipoVeiculo = 'importado'""");
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Locacao loc = new Locacao();
+                loc.setCodigoLocacao(rs.getInt("idlocacao"));
+                loc.setCodigoCliente(rs.getInt("idcliente"));
+                loc.setCodigoFuncionario(rs.getInt("idfuncionario"));
+                
+                Veiculo veic;
+                if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    veic = new VeiculoNacional();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                } else {
+                    veic = new VeiculoImportado();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                    veic.setTaxaImpostoFederal(rs.getFloat("taxaImpostoFederal"));
+                }
+                
+                loc.setVeiculo(veic);
+                loc.setDataLocacao(rs.getDate("data_locacao").toLocalDate());
+                loc.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                loc.setTipoPagamento(rs.getString("tipo_pagamento"));
+                loc.setFinalizada(rs.getBoolean("finalizada"));
+                
+                
+                stmt = con.prepareStatement("""
+                                            SELECT seguro.*
+                                            FROM locacao_seguro
+                                            JOIN seguro ON locacao_seguro.idseguro = seguro.idseguro
+                                            WHERE locacao_seguro.idlocacao = ?""");
+                stmt.setInt(1, rs.getInt("idlocacao"));
+                rs = stmt.executeQuery();
+                
+                ArrayList<Seguro> seguros = new ArrayList<>();
+                while (rs.next()){
+                    Seguro seg = new Seguro();
+                    seg.setCodigoSeguro(rs.getInt("idseguro"));
+                    seg.setNome(rs.getString("nome"));
+                    seg.setTipo(rs.getString("tipo"));
+                    seg.setDescricao(rs.getString("descricao"));
+                    seg.setValor(rs.getFloat("valor"));
+                    seguros.add(seg);
+                }    
+                
+                loc.setSegurosContratados(seguros);
+                loc.setValorTotal(rs.getFloat("valor_total"));
+                
+                locacoes.add(loc);
+            }    
+            
+        } catch (SQLException ex) {
+             System.out.println("ERRO NA BUSCA!");
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return locacoes;
+    
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesEmAtraso() {
+        Connection con = conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<>();
+        
+        try {
+            
+            stmt = con.prepareStatement("""
+                                        SELECT
+                                            locacao.idlocacao,
+                                            locacao.idcliente,
+                                            veiculo.*,
+                                            locacao.data_locacao,
+                                            locacao.data_devolucao,
+                                            locacao.valor_total,
+                                            locacao.tipo_pagamento,
+                                            locacao.finalizada,
+                                            locacao.idfuncionario
+                                        FROM
+                                            locacao
+                                        JOIN
+                                            veiculo ON locacao.idveiculo = veiculo.idveiculo
+                                        WHERE
+                                            locacao.finalizada = 0
+                                            AND locacao.data_devolucao < CURDATE()""");
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Locacao loc = new Locacao();
+                loc.setCodigoLocacao(rs.getInt("idlocacao"));
+                loc.setCodigoCliente(rs.getInt("idcliente"));
+                loc.setCodigoFuncionario(rs.getInt("idfuncionario"));
+                
+                Veiculo veic;
+                if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
+                    veic = new VeiculoNacional();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                } else {
+                    veic = new VeiculoImportado();
+                
+                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                    veic.setNomeModelo(rs.getString("nomeModelo"));
+                    veic.setMontadora(rs.getString("montadora"));
+                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                    veic.setAnoModelo(rs.getInt("anoModelo"));
+                    veic.setPlaca(rs.getString("placa"));
+                    veic.setCategoria(rs.getString("categoria"));
+                    veic.setValorFipe(rs.getFloat("valorFipe"));
+                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                    veic.setAlugado(rs.getBoolean("alugado"));
+                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                    veic.setTaxaImpostoFederal(rs.getFloat("taxaImpostoFederal"));
+                }
+                
+                loc.setVeiculo(veic);
+                loc.setDataLocacao(rs.getDate("data_locacao").toLocalDate());
+                loc.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                loc.setTipoPagamento(rs.getString("tipo_pagamento"));
+                loc.setFinalizada(rs.getBoolean("finalizada"));
+                
+                
+                stmt = con.prepareStatement("""
+                                            SELECT seguro.*
+                                            FROM locacao_seguro
+                                            JOIN seguro ON locacao_seguro.idseguro = seguro.idseguro
+                                            WHERE locacao_seguro.idlocacao = ?""");
+                stmt.setInt(1, rs.getInt("idlocacao"));
+                rs = stmt.executeQuery();
+                
+                ArrayList<Seguro> seguros = new ArrayList<>();
+                while (rs.next()){
+                    Seguro seg = new Seguro();
+                    seg.setCodigoSeguro(rs.getInt("idseguro"));
+                    seg.setNome(rs.getString("nome"));
+                    seg.setTipo(rs.getString("tipo"));
+                    seg.setDescricao(rs.getString("descricao"));
+                    seg.setValor(rs.getFloat("valor"));
+                    seguros.add(seg);
+                }    
+                
+                loc.setSegurosContratados(seguros);
+                loc.setValorTotal(rs.getFloat("valor_total"));
+                
+                locacoes.add(loc);
+            }    
+            
+        } catch (SQLException ex) {
+             System.out.println("ERRO NA BUSCA!");
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return locacoes;
+    
+    }
+    
+    public ArrayList<Locacao> buscarLocacaoAtivaPorIDVeiculo(int codigoVeiculo) {
+        Connection con = conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<>();
+        
+        try {
+            
+            stmt = con.prepareStatement("""
+                                        SELECT
+                                            locacao.idlocacao,
+                                            locacao.idcliente,
+                                            veiculo.*,
+                                            locacao.data_locacao,
+                                            locacao.data_devolucao,
+                                            locacao.valor_total,
+                                            locacao.tipo_pagamento,
+                                            locacao.finalizada,
+                                            locacao.idfuncionario
+                                        FROM
+                                            locacao
+                                        JOIN
+                                            veiculo ON locacao.idveiculo = veiculo.idveiculo
+                                        WHERE
+                                            locacao.idveiculo = ?
+                                            AND locacao.finalizada = 0""");
+            stmt.setInt(1, codigoVeiculo);
             rs = stmt.executeQuery();
             
             while (rs.next()) {

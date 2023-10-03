@@ -40,6 +40,13 @@ public class LocadoraDeVeiculos {
         this.funcionarios = new ArrayList<Usuario>();
         this.seguros = new ArrayList<Seguro>();
     }
+    
+    public static LocadoraDeVeiculos getInstancia(String nome, String endereco, String website, String redeSocial){
+        if (instancia == null){
+            instancia = new LocadoraDeVeiculos(nome, endereco, website, redeSocial);
+        }
+        return instancia;
+    }
 
     public String getNome() {
         return nome;
@@ -118,7 +125,8 @@ public class LocadoraDeVeiculos {
                            String numeroCNH, String validadeCNH, boolean clienteOuro){
         
         Cliente cliente = new Cliente(nome,cpf,rg,dataNasci,endereco,cep,email,categoriaCNH,numeroCNH,validadeCNH,clienteOuro);
-        ClienteDAO.create(cliente);
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.create(cliente);
     }
     
     public void addFuncionario(String nome, String cpf, String rg, String dataNasci,
@@ -126,7 +134,8 @@ public class LocadoraDeVeiculos {
                                String pis, String dataAdmissao){
         
         Funcionario func = new Funcionario(nome,cpf,rg,dataNasci,endereco,cep,email,salario,pis,dataAdmissao);
-        FuncionarioDAO.create(func);
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        funcDAO.create(func);
     }
     
     public void addVeiculoImportado(String tipoVeiculo,String nomeModelo, String montadora,
@@ -138,7 +147,8 @@ public class LocadoraDeVeiculos {
         Veiculo veic = new VeiculoImportado(tipoVeiculo, nomeModelo, montadora, anoFabricacao, anoModelo,
                                             placa, categoria, valorFipe, valorDiaria, 
                                             categoriaCNHNecessaria, taxaImpostoEstadual, taxaImpostoFederal);
-        VeiculoDAO.create(veic);
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        veicDAO.create(veic);
     }
     
     public void addVeiculoNacional(String tipoVeiculo,String nomeModelo, String montadora,
@@ -150,28 +160,146 @@ public class LocadoraDeVeiculos {
         Veiculo veic = new VeiculoNacional(tipoVeiculo, nomeModelo, montadora, anoFabricacao, anoModelo,
                                             placa, categoria, valorFipe, valorDiaria, 
                                             categoriaCNHNecessaria, taxaImpostoEstadual);
-        VeiculoDAO.create(veic);
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        veicDAO.create(veic);
     }
     
     public void addSeguro(String nome, String tipo, String descricao, float valor){
         
         Seguro seguro = new Seguro(nome,tipo,descricao,valor);
-        SeguroDAO.create(seguro);
+        SeguroDAO segDAO = new SeguroDAO();
+        segDAO.create(seguro);
     }
     
     public void addLocacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao,
                            String dataDevolucao, float valorTotal, String tipoPagamento, ArrayList<Seguro> segurosContratados){
         
-        Veiculo veic = VeiculoDAO.buscarVeiculo(codigoVeiculo);
-        Locacao loc = new Locacao(codigoCliente, codigoFuncionario, veic, dataLocacao, dataDevolucao, valorTotal, tipoPagamento, segurosContratados);
-        LocacaoDAO.create(loc);
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        Veiculo veic = veicDAO.buscarVeiculo(codigoVeiculo);
+        
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Cliente cliente = clienteDAO.buscarClientePorID(codigoCliente);
+        
+        if (cliente.getCategoriaCNH().equalsIgnoreCase(veic.getCategoriaCNHNecessaria())){
+            Locacao loc = new Locacao(codigoCliente, codigoFuncionario, veic, dataLocacao, dataDevolucao, valorTotal, tipoPagamento, segurosContratados);
+            LocacaoDAO locDAO = new LocacaoDAO();
+            locDAO.create(loc);
+            return;
+        }
+        System.out.println("Cliente nao possui Categoria CNH necessaria");
+    }
+    
+    public ArrayList<Veiculo> listarTodosVeiculos(){
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        return veicDAO.listarTodosVeiculos();
+    }
+    
+    public ArrayList<Veiculo> listarTodosVeiculosNacionais(){
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        return veicDAO.listarTodosVeiculosNacionais();
     }
 
-    public static LocadoraDeVeiculos getInstancia(String nome, String endereco, String website, String redeSocial){
-        if (instancia == null){
-            instancia = new LocadoraDeVeiculos(nome, endereco, website, redeSocial);
-        }
-        return instancia;
+    public ArrayList<Veiculo> listarTodosVeiculosImportados(){
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        return veicDAO.listarTodosVeiculosImportados();
     }
+    
+    public ArrayList<Veiculo> listarTodosVeiculosDisponiveis(){
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        return veicDAO.listarTodosVeiculosDisponiveis();
+    }
+    
+    public ArrayList<Veiculo> listarVeiculosDisponiveisCNHEspecifica(String categoriaCNH) {
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        return veicDAO.listarVeiculosDisponiveisCNHEspecifica(categoriaCNH);
+    }
+    
+    public ArrayList<Veiculo> listarTodosVeiculosAlugados(){
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        return veicDAO.listarTodosVeiculosAlugados();
+    }
+    
+    public ArrayList<Veiculo> listarTodosVeiculosComAtrasoDevolucao(){
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        return veicDAO.listarTodosVeiculosComAtrasoDevolucao();
+    }
+    
+    public ArrayList<Cliente> listarClientesAlugaramVeiculoEspecifico(int codigoVeiculo) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.listarClientesAlugaramVeiculoEspecifico(codigoVeiculo);
+    }
+    
+    public ArrayList<Funcionario> listarTodosFuncionarios(){
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        return funcDAO.listarTodosFuncionarios();
+    }
+    
+    public ArrayList<Funcionario> listarFuncionariosDoMes(){
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        return funcDAO.listarFuncionariosDoMes();
+    }
+    
+    public ArrayList<Cliente> listarTodosClientes() {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.listarTodosClientes();
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesClienteEspecifico(int codigoCliente) {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoesClienteEspecifico(codigoCliente);
+    }
+    
+    public ArrayList<Cliente> listarClientesLocacaoAtraso() {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.listarClientesLocacaoAtraso();
+    }   
+    
+    public ArrayList<Locacao> listarTodasLocacoes() {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoes();
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesMesEspecifico(int mes) {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoesMesEspecifico(mes);
+    }
+    
+    public ArrayList<Locacao> lucroTotalMesEspecifico(int mes) {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.lucroTotalMesEspecifico(mes);
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesFinalizadas() {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoesFinalizadas();
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadas() {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoesNaoFinalizadas();
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadasVeiculosNacionais() {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoesNaoFinalizadasVeiculosNacionais();
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadasVeiculosImportados() {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoesNaoFinalizadasVeiculosImportados();
+    }
+    
+    public ArrayList<Locacao> listarTodasLocacoesEmAtaso() {
+        LocacaoDAO locDAO = new LocacaoDAO();
+        return locDAO.listarTodasLocacoesEmAtraso();
+    }
+    
+    public ArrayList<Seguro> listarTodosSeguros() {
+        SeguroDAO segDAO = new SeguroDAO();
+        return segDAO.listarTodosSeguros();
+    }
+    
+    
+    
 }
 

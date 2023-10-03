@@ -20,9 +20,10 @@ import models.Seguro;
  * @author alunos
  */
 public class SeguroDAO {
+    private Conexao conexao = new Conexao();
     
-    public static void create(Seguro seg){
-        Connection con = Conexao.getConexao();
+    public void create(Seguro seg){
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         
         try {
@@ -46,7 +47,7 @@ public class SeguroDAO {
     }
     
     public ArrayList<Seguro> listarTodosSeguros() {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 

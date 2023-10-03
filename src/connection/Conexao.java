@@ -9,20 +9,20 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 
 public class Conexao {
-    private static final String URL = "jdbc:mysql://localhost:3306/alugueldeveiculos";
-    private static final String USER = "root";
-    private static final String PASSWORD = "root";
-    private static Connection conexao;
+    private final String URL = "jdbc:mysql://localhost:3306/alugueldeveiculos";
+    private final String USER = "root";
+    private final String PASSWORD = "root";
+    private Connection conexao = null;
     
-    public static Connection getConexao(){
+    public Connection getConexao(){
         try {
-            if (conexao == null){
-                conexao = DriverManager.getConnection(URL, USER, PASSWORD);
+            if (this.conexao == null){
+                this.conexao = DriverManager.getConnection(URL, USER, PASSWORD);
                 System.out.println("Nova conexao iniciada");
-                return conexao;
+                return this.conexao;
             } else {
                 System.out.println("Ja tinha conexao");
-                return conexao;
+                return this.conexao;
             }
         } catch (SQLException e) {
             e.printStackTrace();

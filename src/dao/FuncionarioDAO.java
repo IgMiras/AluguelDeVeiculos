@@ -19,9 +19,10 @@ import java.util.logging.Logger;
  * @author alunos
  */
 public class FuncionarioDAO {
+    private Conexao conexao = new Conexao();
     
-    public static void create(Funcionario func){
-        Connection con = Conexao.getConexao();
+    public void create(Funcionario func){
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         
         try {
@@ -51,7 +52,7 @@ public class FuncionarioDAO {
     }
     
     public ArrayList<Funcionario> listarTodosFuncionarios(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -87,7 +88,7 @@ public class FuncionarioDAO {
     }
     
     public ArrayList<Funcionario> listarFuncionariosDoMes(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         

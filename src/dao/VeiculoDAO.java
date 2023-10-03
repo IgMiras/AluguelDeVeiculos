@@ -21,9 +21,10 @@ import models.VeiculoNacional;
  * @author alunos
  */
 public class VeiculoDAO {
+    private Conexao conexao = new Conexao();
     
-    public static void create(Veiculo veic){
-        Connection con = Conexao.getConexao();
+    public void create(Veiculo veic){
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         
         try {
@@ -60,7 +61,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> listarTodosVeiculos(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -120,7 +121,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> listarTodosVeiculosNacionais(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -158,7 +159,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> listarTodosVeiculosImportados(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -197,7 +198,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> listarTodosVeiculosDisponiveis(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -256,7 +257,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> listarVeiculosDisponiveisCNHEspecifica(String categoriaCNH) {
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -319,7 +320,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> listarTodosVeiculosAlugados(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -378,7 +379,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> listarTodosVeiculosComAtrasoDevolucao(){
-        Connection con = Conexao.getConexao();
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -440,8 +441,8 @@ public class VeiculoDAO {
         return veiculos;
     }
     
-    public static Veiculo buscarVeiculo(int codigoVeiculo){
-        Connection con = Conexao.getConexao();
+    public Veiculo buscarVeiculo(int codigoVeiculo){
+        Connection con = conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -451,22 +452,22 @@ public class VeiculoDAO {
             rs = stmt.executeQuery();
             
             if (rs.getString("tipoVeiculo").toLowerCase().contains("nacional")){
-                    Veiculo veic = new VeiculoNacional();
+                Veiculo veic = new VeiculoNacional();
                 
-                    veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
-                    veic.setCodigoVeiculo(rs.getInt("idveiculo"));
-                    veic.setNomeModelo(rs.getString("nomeModelo"));
-                    veic.setMontadora(rs.getString("montadora"));
-                    veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
-                    veic.setAnoModelo(rs.getInt("anoModelo"));
-                    veic.setPlaca(rs.getString("placa"));
-                    veic.setCategoria(rs.getString("categoria"));
-                    veic.setValorFipe(rs.getFloat("valorFipe"));
-                    veic.setValorDiaria(rs.getFloat("valorDiaria"));
-                    veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
-                    veic.setAlugado(rs.getBoolean("alugado"));
-                    veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
-                    return veic;
+                veic.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                veic.setCodigoVeiculo(rs.getInt("idveiculo"));
+                veic.setNomeModelo(rs.getString("nomeModelo"));
+                veic.setMontadora(rs.getString("montadora"));
+                veic.setAnoFabricacao(rs.getInt("anoFabricacao"));
+                veic.setAnoModelo(rs.getInt("anoModelo"));
+                veic.setPlaca(rs.getString("placa"));
+                veic.setCategoria(rs.getString("categoria"));
+                veic.setValorFipe(rs.getFloat("valorFipe"));
+                veic.setValorDiaria(rs.getFloat("valorDiaria"));
+                veic.setCategoriaCNHNecessaria(rs.getString("categoriaCNHNecessaria"));
+                veic.setAlugado(rs.getBoolean("alugado"));
+                veic.setTaxaImpostoEstadual(rs.getFloat("taxaImpostoEstadual"));
+                return veic;
             }
             
             if (rs.getString("tipoVeiculo").toLowerCase().contains("importado")){
