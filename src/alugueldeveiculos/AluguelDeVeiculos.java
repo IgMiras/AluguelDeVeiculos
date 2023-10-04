@@ -22,6 +22,12 @@ public class AluguelDeVeiculos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UIPrincipal().setVisible(true);
+            }
+        });
         LocadoraDeVeiculos locadora = LocadoraDeVeiculos.getInstancia("AluguelDeVeiculos"
             , "R. Osvaldo Peretti, 98. Jardim das Rosas. Presidente Prudente - SP"
             , "www.alugueldeveiculos.com.br"
