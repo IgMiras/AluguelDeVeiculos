@@ -4,6 +4,10 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laís Isabella
@@ -27,40 +31,41 @@ public class UICadastroCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        textNumeroCNH = new javax.swing.JTextField();
+        textNumeroCnh = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        textCPF2 = new javax.swing.JTextField();
-        textCategoriaCNH = new javax.swing.JTextField();
+        textRg = new javax.swing.JTextField();
+        textCategoriaCnh = new javax.swing.JTextField();
         textNascimento = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        textValidadeCNH = new javax.swing.JTextField();
+        textValidadeCnh = new javax.swing.JTextField();
         textNome = new javax.swing.JTextField();
-        textEndereço = new javax.swing.JTextField();
+        textEndereco = new javax.swing.JTextField();
         buttonSalvar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        textCEP = new javax.swing.JTextField();
+        textCep = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        textCPF = new javax.swing.JTextField();
+        textCpf = new javax.swing.JTextField();
         textEmail = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        buttonClienteOuroSim = new javax.swing.JRadioButton();
-        buttonClienteOuroNao = new javax.swing.JRadioButton();
+        radioSim = new javax.swing.JRadioButton();
+        radioNao = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Source Sans Pro Light", 1, 18)); // NOI18N
         jLabel1.setText("Cadastro de Novo Cliente");
 
-        textNumeroCNH.addActionListener(new java.awt.event.ActionListener() {
+        textNumeroCnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNumeroCNHActionPerformed(evt);
+                textNumeroCnhActionPerformed(evt);
             }
         });
 
@@ -73,15 +78,15 @@ public class UICadastroCliente extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel2.setText("CPF");
 
-        textCPF2.addActionListener(new java.awt.event.ActionListener() {
+        textRg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCPF2ActionPerformed(evt);
+                textRgActionPerformed(evt);
             }
         });
 
-        textCategoriaCNH.addActionListener(new java.awt.event.ActionListener() {
+        textCategoriaCnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCategoriaCNHActionPerformed(evt);
+                textCategoriaCnhActionPerformed(evt);
             }
         });
 
@@ -97,9 +102,9 @@ public class UICadastroCliente extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel6.setText("Endereço");
 
-        textValidadeCNH.addActionListener(new java.awt.event.ActionListener() {
+        textValidadeCnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textValidadeCNHActionPerformed(evt);
+                textValidadeCnhActionPerformed(evt);
             }
         });
 
@@ -111,9 +116,9 @@ public class UICadastroCliente extends javax.swing.JDialog {
             }
         });
 
-        textEndereço.addActionListener(new java.awt.event.ActionListener() {
+        textEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textEndereçoActionPerformed(evt);
+                textEnderecoActionPerformed(evt);
             }
         });
 
@@ -130,18 +135,18 @@ public class UICadastroCliente extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel7.setText("CEP");
 
-        textCEP.addActionListener(new java.awt.event.ActionListener() {
+        textCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCEPActionPerformed(evt);
+                textCepActionPerformed(evt);
             }
         });
 
         jLabel8.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel8.setText("Email");
 
-        textCPF.addActionListener(new java.awt.event.ActionListener() {
+        textCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCPFActionPerformed(evt);
+                textCpfActionPerformed(evt);
             }
         });
 
@@ -160,9 +165,11 @@ public class UICadastroCliente extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel12.setText("Cliente Ouro");
 
-        buttonClienteOuroSim.setText("Sim");
+        buttonGroup1.add(radioSim);
+        radioSim.setText("Sim");
 
-        buttonClienteOuroNao.setText("Não");
+        buttonGroup1.add(radioNao);
+        radioNao.setText("Não");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,35 +189,35 @@ public class UICadastroCliente extends javax.swing.JDialog {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(textCPF, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(textCpf, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGap(37, 37, 37)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
-                                .addComponent(textCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textEndereço, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textEndereco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textCEP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textCep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
-                                            .addComponent(textNumeroCNH, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textNumeroCnh, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel11)
-                                            .addComponent(textValidadeCNH, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(textValidadeCnh, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(35, 35, 35)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textCategoriaCNH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textCategoriaCnh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(buttonClienteOuroSim)
+                                                .addComponent(radioSim)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(buttonClienteOuroNao))))
+                                                .addComponent(radioNao))))
                                     .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -239,21 +246,21 @@ public class UICadastroCliente extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -261,20 +268,20 @@ public class UICadastroCliente extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textNumeroCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textNumeroCnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textCategoriaCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textCategoriaCnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textValidadeCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonClienteOuroSim)
-                    .addComponent(buttonClienteOuroNao))
+                    .addComponent(textValidadeCnh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioSim)
+                    .addComponent(radioNao))
                 .addGap(18, 18, 18)
                 .addComponent(buttonSalvar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -283,45 +290,82 @@ public class UICadastroCliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textNumeroCNHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumeroCNHActionPerformed
+    private void textNumeroCnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumeroCnhActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textNumeroCNHActionPerformed
+    }//GEN-LAST:event_textNumeroCnhActionPerformed
 
-    private void textCPF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCPF2ActionPerformed
+    private void textRgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRgActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCPF2ActionPerformed
+    }//GEN-LAST:event_textRgActionPerformed
 
-    private void textCategoriaCNHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCategoriaCNHActionPerformed
+    private void textCategoriaCnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCategoriaCnhActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCategoriaCNHActionPerformed
+    }//GEN-LAST:event_textCategoriaCnhActionPerformed
 
     private void textNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNascimentoActionPerformed
 
-    private void textValidadeCNHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textValidadeCNHActionPerformed
+    private void textValidadeCnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textValidadeCnhActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textValidadeCNHActionPerformed
+    }//GEN-LAST:event_textValidadeCnhActionPerformed
 
     private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNomeActionPerformed
 
-    private void textEndereçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEndereçoActionPerformed
+    private void textEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEnderecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textEndereçoActionPerformed
+    }//GEN-LAST:event_textEnderecoActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
+        
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
+        String nome = textNome.getText();
+        String cpf = textCpf.getText();
+        String rg = textRg.getText();
+        String dataNascimento = textNascimento.getText();
+        String endereco = textEndereco.getText();
+        String cep = textCep.getText();
+        String email = textEmail.getText();
+        String numCnh = textNumeroCnh.getText();
+        String categoriaCnh = textCategoriaCnh.getText();
+        String validade = textValidadeCnh.getText();
+        Boolean clienteOuro = false;
+        if(radioSim.isSelected()){
+            clienteOuro = true;
+        } else {
+            clienteOuro = false;
+        }
+        
+        
+        control.addCliente(nome, cpf, rg, dataNascimento, endereco, cep, 
+                            email, categoriaCnh, numCnh, validade, clienteOuro);
+        
+        JOptionPane.showMessageDialog(jFrame, "Cliente cadastrado com sucesso!");
+        textNome.setEditable(false);
+        textCpf.setEditable(false);
+        textRg.setEditable(false);
+        textNascimento.setEditable(false);
+        textEndereco.setEditable(false);
+        textCep.setEditable(false);
+        textEmail.setEditable(false);
+        textNumeroCnh.setEditable(false);
+        textCategoriaCnh.setEditable(false);
+        textValidadeCnh.setEditable(false); 
+        
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
+    private void textCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCepActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCEPActionPerformed
+    }//GEN-LAST:event_textCepActionPerformed
 
-    private void textCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCPFActionPerformed
+    private void textCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCPFActionPerformed
+    }//GEN-LAST:event_textCpfActionPerformed
 
     private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailActionPerformed
         // TODO add your handling code here:
@@ -373,8 +417,7 @@ public class UICadastroCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton buttonClienteOuroNao;
-    private javax.swing.JRadioButton buttonClienteOuroSim;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -388,15 +431,17 @@ public class UICadastroCliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField textCEP;
-    private javax.swing.JTextField textCPF;
-    private javax.swing.JTextField textCPF2;
-    private javax.swing.JTextField textCategoriaCNH;
+    private javax.swing.JRadioButton radioNao;
+    private javax.swing.JRadioButton radioSim;
+    private javax.swing.JTextField textCategoriaCnh;
+    private javax.swing.JTextField textCep;
+    private javax.swing.JTextField textCpf;
     private javax.swing.JTextField textEmail;
-    private javax.swing.JTextField textEndereço;
+    private javax.swing.JTextField textEndereco;
     private javax.swing.JTextField textNascimento;
     private javax.swing.JTextField textNome;
-    private javax.swing.JTextField textNumeroCNH;
-    private javax.swing.JTextField textValidadeCNH;
+    private javax.swing.JTextField textNumeroCnh;
+    private javax.swing.JTextField textRg;
+    private javax.swing.JTextField textValidadeCnh;
     // End of variables declaration//GEN-END:variables
 }

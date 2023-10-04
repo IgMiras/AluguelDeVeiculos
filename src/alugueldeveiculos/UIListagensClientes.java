@@ -4,6 +4,10 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laís Isabella
@@ -35,7 +39,7 @@ public class UIListagensClientes extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textListagens = new javax.swing.JTextArea();
+        textAreaListagens = new javax.swing.JTextArea();
         jSeparator2 = new javax.swing.JSeparator();
         radioTodos = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
@@ -72,9 +76,9 @@ public class UIListagensClientes extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel2.setText("Selecione qual relatório você deseja listar:");
 
-        textListagens.setColumns(20);
-        textListagens.setRows(5);
-        jScrollPane1.setViewportView(textListagens);
+        textAreaListagens.setColumns(20);
+        textAreaListagens.setRows(5);
+        jScrollPane1.setViewportView(textAreaListagens);
 
         buttonGroup1.add(radioTodos);
         radioTodos.setText("Clientes cadastrados");
@@ -89,37 +93,43 @@ public class UIListagensClientes extends javax.swing.JDialog {
 
         textClienteNome.setEditable(false);
 
-        jLabel3.setText("Nome");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel3.setText("Código do cliente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioClientesAtrasados)
-                                    .addComponent(radioTodos)
-                                    .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(buttonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(textClienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(radioHistorico)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textClienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(radioClientesAtrasados)
+                                            .addComponent(radioTodos)
+                                            .addComponent(jLabel2)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(21, 21, 21)
+                                                .addComponent(buttonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(radioHistorico)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(21, 21, 21))))
         );
@@ -139,9 +149,9 @@ public class UIListagensClientes extends javax.swing.JDialog {
                         .addComponent(radioTodos)
                         .addGap(30, 30, 30)
                         .addComponent(radioClientesAtrasados)
-                        .addGap(31, 31, 31)
+                        .addGap(25, 25, 25)
                         .addComponent(radioHistorico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textClienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
@@ -158,6 +168,22 @@ public class UIListagensClientes extends javax.swing.JDialog {
 
     private void buttonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListarActionPerformed
         // TODO add your handling code here:
+        
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
+        if(radioTodos.isSelected()){
+            textAreaListagens.setText(control.ListarTodosClientesCadastrados());
+        } else 
+            if(radioClientesAtrasados.isSelected()){
+                textAreaListagens.setText(control.ListarClientesComLocacoesEmAtraso());
+            } else 
+                if(radioHistorico.isSelected()){
+                    int cod = Integer.parseInt(textClienteNome.getText());
+                    textAreaListagens.setText(control.ListarHistoricoCliente(cod));
+                } else {
+                    JOptionPane.showMessageDialog(jFrame, "Selecione algum opção de listagem!");
+                }
     }//GEN-LAST:event_buttonListarActionPerformed
 
     private void radioTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosActionPerformed
@@ -174,7 +200,7 @@ public class UIListagensClientes extends javax.swing.JDialog {
         textClienteNome.setEditable(false);
         } else {
             textClienteNome.setEditable(true);
-        }
+        } 
     }//GEN-LAST:event_radioHistoricoActionPerformed
 
     /**
@@ -210,10 +236,7 @@ public class UIListagensClientes extends javax.swing.JDialog {
             public void run() {
                 UIListagensClientes dialog = new UIListagensClientes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
+                    
                 });
                 dialog.setVisible(true);
             }
@@ -233,7 +256,7 @@ public class UIListagensClientes extends javax.swing.JDialog {
     private javax.swing.JRadioButton radioClientesAtrasados;
     private javax.swing.JRadioButton radioHistorico;
     private javax.swing.JRadioButton radioTodos;
+    private javax.swing.JTextArea textAreaListagens;
     private javax.swing.JTextField textClienteNome;
-    private javax.swing.JTextArea textListagens;
     // End of variables declaration//GEN-END:variables
 }

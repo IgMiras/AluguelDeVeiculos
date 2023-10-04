@@ -189,7 +189,7 @@ public class LocadoraDeVeiculos {
         System.out.println("Cliente nao possui Categoria CNH necessaria");
     }
     
-    public String listarTodosVeiculos(){
+    public String ListarTodosVeiculosCadastrados(){
         VeiculoDAO veicDAO = new VeiculoDAO();
         String relatorio = "";
         for (Veiculo veic : veicDAO.listarTodosVeiculos()){
@@ -204,7 +204,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodosVeiculosNacionais(){
+    public String ListarTodosVeiculosNacionais(){
         VeiculoDAO veicDAO = new VeiculoDAO();
         String relatorio = "";
         for (Veiculo veic: veicDAO.listarTodosVeiculosNacionais()){
@@ -214,7 +214,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
 
-    public String listarTodosVeiculosImportados(){
+    public String ListarTodosVeiculosImportados(){
         VeiculoDAO veicDAO = new VeiculoDAO();
         String relatorio = "";
         for (Veiculo veic: veicDAO.listarTodosVeiculosImportados()){
@@ -224,7 +224,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodosVeiculosDisponiveis(){
+    public String ListarTodosVeiculosDisponiveis(){
         VeiculoDAO veicDAO = new VeiculoDAO();
         String relatorio = "";
         for (Veiculo veic : veicDAO.listarTodosVeiculosDisponiveis()){
@@ -239,7 +239,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarVeiculosDisponiveisCNHEspecifica(String categoriaCNH) {
+    public String ListarVeiculosDisponiveisCNHEspecifica(String categoriaCNH) {
         VeiculoDAO veicDAO = new VeiculoDAO();
         String relatorio = "";
         for (Veiculo veic : veicDAO.listarVeiculosDisponiveisCNHEspecifica(categoriaCNH)){
@@ -254,7 +254,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodosVeiculosAlugados(){
+    public String ListarTodosVeiculosAlugados(){
         VeiculoDAO veicDAO = new VeiculoDAO();
         String relatorio = "";
         for (Veiculo veic : veicDAO.listarTodosVeiculosAlugados()){
@@ -269,7 +269,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodosVeiculosComAtrasoDevolucao(){
+    public String ListarTodosVeiculosComAtrasoDevolucao(){
         VeiculoDAO veicDAO = new VeiculoDAO();
         String relatorio = "";
         for (Veiculo veic : veicDAO.listarTodosVeiculosAlugados()){
@@ -284,7 +284,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarClientesAlugaramVeiculoEspecifico(int codigoVeiculo) {
+    public String ListarClientesAlugaramVeiculoEspecifico(int codigoVeiculo) {
         ClienteDAO clienteDAO = new ClienteDAO();
         String relatorio = "";
         for (Cliente cliente : clienteDAO.listarClientesAlugaramVeiculoEspecifico(codigoVeiculo)){
@@ -293,7 +293,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodosFuncionarios(){
+    public String ListarTodosFuncionariosCadastrados(){
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         String relatorio = "";
         for (Funcionario func : funcDAO.listarTodosFuncionarios()){
@@ -302,7 +302,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarFuncionariosDoMes(){
+    public String ListarFuncionariosDoMes(){
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         String relatorio = "";
         for (Funcionario func : funcDAO.listarFuncionariosDoMes()){
@@ -311,7 +311,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodosClientes() {
+    public String ListarTodosClientesCadastrados() {
         ClienteDAO clienteDAO = new ClienteDAO();
         String relatorio = "";
         for (Cliente cliente : clienteDAO.listarTodosClientes()){
@@ -320,7 +320,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodasLocacoesClienteEspecifico(int codigoCliente) {
+    public String ListarHistoricoCliente(int codigoCliente) {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoesClienteEspecifico(codigoCliente)){
@@ -329,7 +329,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarClientesLocacaoAtraso() {
+    public String ListarClientesComLocacoesEmAtraso() {
         ClienteDAO clienteDAO = new ClienteDAO();
         String relatorio = "";
         for (Cliente cliente : clienteDAO.listarClientesLocacaoAtraso()){
@@ -338,7 +338,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }   
     
-    public String listarTodasLocacoes() {
+    public String ListarTodasLocacoes() {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoes()){
@@ -347,7 +347,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodasLocacoesMesEspecifico(int mes) {
+    public String ListarTodasLocacoesMesEspecifico(int mes) {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoesMesEspecifico(mes)){
@@ -356,7 +356,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String lucroTotalMesEspecifico(int mes) {
+    public String LucroTotalMesEspecifico(int mes) {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.lucroTotalMesEspecifico(mes)){
@@ -365,7 +365,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodasLocacoesFinalizadas() {
+    public String ListarTodasLocacoesFinalizadas() {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoesFinalizadas()){
@@ -374,7 +374,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodasLocacoesNaoFinalizadas() {
+    public String ListarTodasLocacoesNaoFinalizadas() {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadas()){
@@ -383,7 +383,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodasLocacoesNaoFinalizadasVeiculosNacionais() {
+    public String ListarTodasLocacoesNaoFinalizadasVeiculosNacionais() {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadasVeiculosNacionais()){
@@ -392,7 +392,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodasLocacoesNaoFinalizadasVeiculosImportados() {
+    public String ListarTodasLocacoesNaoFinalizadasVeiculosImportados() {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadasVeiculosImportados()){
@@ -401,7 +401,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodasLocacoesEmAtaso() {
+    public String ListarTodasLocacoesEmAtaso() {
         LocacaoDAO locDAO = new LocacaoDAO();
         String relatorio = "";
         for (Locacao loc : locDAO.listarTodasLocacoesEmAtraso()){
@@ -410,7 +410,7 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
-    public String listarTodosSeguros() {
+    public String ListarTodosSeguros() {
         SeguroDAO segDAO = new SeguroDAO();
         String relatorio = "";
         for (Seguro seg : segDAO.listarTodosSeguros()){

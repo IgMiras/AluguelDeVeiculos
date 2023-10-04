@@ -350,6 +350,10 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
+        
+        String tipoVeiculo = "importado";
+        
+        
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void textCategoriaCNHVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCategoriaCNHVeiculoActionPerformed

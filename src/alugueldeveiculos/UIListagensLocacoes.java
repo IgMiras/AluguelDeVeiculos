@@ -4,6 +4,11 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import java.time.LocalDate;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author sabri
@@ -27,34 +32,28 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        radioSeguros = new javax.swing.JRadioButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textListagens = new javax.swing.JTextArea();
+        textAreaListagens = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         buttonListar = new javax.swing.JButton();
-        radioTodosLocacoes = new javax.swing.JRadioButton();
+        radioTodasLocacoes = new javax.swing.JRadioButton();
         radioLucroMes = new javax.swing.JRadioButton();
         radioFinalizadas = new javax.swing.JRadioButton();
         radioNaoFinalizadas = new javax.swing.JRadioButton();
-        radioEmAtraso = new javax.swing.JRadioButton();
+        radioLocacoesEmAtraso = new javax.swing.JRadioButton();
         comboMes = new javax.swing.JComboBox<>();
         comboLocacoes = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        radioSeguros.setText("Tipos de Seguros");
-        radioSeguros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioSegurosActionPerformed(evt);
-            }
-        });
-
-        textListagens.setColumns(20);
-        textListagens.setRows(5);
-        jScrollPane1.setViewportView(textListagens);
+        textAreaListagens.setEditable(false);
+        textAreaListagens.setColumns(20);
+        textAreaListagens.setRows(5);
+        jScrollPane1.setViewportView(textAreaListagens);
 
         jLabel1.setFont(new java.awt.Font("Source Sans Pro Light", 1, 24)); // NOI18N
         jLabel1.setText("Listagens Locações");
@@ -69,13 +68,15 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
             }
         });
 
-        radioTodosLocacoes.setText("Toodas as Locações Realizadas");
-        radioTodosLocacoes.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(radioTodasLocacoes);
+        radioTodasLocacoes.setText("Todas as Locações Realizadas");
+        radioTodasLocacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioTodosLocacoesActionPerformed(evt);
+                radioTodasLocacoesActionPerformed(evt);
             }
         });
 
+        buttonGroup1.add(radioLucroMes);
         radioLucroMes.setText("Locações e Lucro do mês");
         radioLucroMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,8 +84,10 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(radioFinalizadas);
         radioFinalizadas.setText("Locações Finalizadas");
 
+        buttonGroup1.add(radioNaoFinalizadas);
         radioNaoFinalizadas.setText("Locações não Finalizadas");
         radioNaoFinalizadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,17 +95,18 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
             }
         });
 
-        radioEmAtraso.setText("Locações em Atraso");
-        radioEmAtraso.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(radioLocacoesEmAtraso);
+        radioLocacoesEmAtraso.setText("Locações em Atraso");
+        radioLocacoesEmAtraso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioEmAtrasoActionPerformed(evt);
+                radioLocacoesEmAtrasoActionPerformed(evt);
             }
         });
 
         comboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
         comboMes.setEnabled(false);
 
-        comboLocacoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Geral", "Nacional", "Importado", " " }));
+        comboLocacoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Geral", "Nacional", "Importado" }));
         comboLocacoes.setEnabled(false);
         comboLocacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,8 +130,7 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
                             .addComponent(jSeparator1)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioSeguros)
-                                    .addComponent(radioTodosLocacoes)
+                                    .addComponent(radioTodasLocacoes)
                                     .addComponent(jLabel2)
                                     .addComponent(buttonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
@@ -138,7 +141,7 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
                                         .addComponent(comboMes, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(radioEmAtraso, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(radioLocacoesEmAtraso, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(radioNaoFinalizadas, javax.swing.GroupLayout.Alignment.LEADING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(comboLocacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -159,7 +162,7 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(radioTodosLocacoes)
+                        .addComponent(radioTodasLocacoes)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(radioLucroMes)
@@ -171,10 +174,8 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
                             .addComponent(radioNaoFinalizadas)
                             .addComponent(comboLocacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(radioEmAtraso)
-                        .addGap(18, 18, 18)
-                        .addComponent(radioSeguros)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addComponent(radioLocacoesEmAtraso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                         .addComponent(buttonListar)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,28 +185,60 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radioSegurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioSegurosActionPerformed
-        // TODO add your handling code here:
-        comboLocacoes.setVisible(true);
-        comboLocacoes.setEnabled(true);
-    }//GEN-LAST:event_radioSegurosActionPerformed
-
     private void buttonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListarActionPerformed
         // TODO add your handling code here:
+        
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
+        if(radioTodasLocacoes.isSelected()){
+            textAreaListagens.setText(control.ListarTodasLocacoes());
+        } else
+            if(radioLucroMes.isSelected()){
+                String relatorio ="";
+                LocalDate hoje = LocalDate.now();
+                int mes = comboMes.getSelectedIndex()+1;
+                relatorio = control.ListarTodasLocacoesMesEspecifico(mes);
+                relatorio += "\nLucro total do mês: " + control.LucroTotalMesEspecifico(mes);
+                textAreaListagens.setText(relatorio);
+            } else
+                if(radioFinalizadas.isSelected()){
+                    textAreaListagens.setText(control.ListarTodasLocacoesNaoFinalizadas());
+                } else
+                    if(radioNaoFinalizadas.isSelected()){
+                        int tipo = comboLocacoes.getSelectedIndex();
+                        switch(tipo){
+                            case 0:
+                                textAreaListagens.setText(control.ListarTodasLocacoes());
+                                break;
+                                
+                            case 1:
+                                textAreaListagens.setText(control.ListarTodasLocacoesNaoFinalizadasVeiculosNacionais());
+                            
+                            case 2:
+                                textAreaListagens.setText(control.ListarTodasLocacoesNaoFinalizadasVeiculosImportados());
+                                break;
+                        }
+                    } else 
+                        if(radioLocacoesEmAtraso.isSelected()){
+                            textAreaListagens.setText(control.ListarTodasLocacoesEmAtaso());
+                        } else {
+                            JOptionPane.showMessageDialog(jFrame, "Selecione algum opção de listagem!");
+                        }
     }//GEN-LAST:event_buttonListarActionPerformed
 
-    private void radioTodosLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosLocacoesActionPerformed
+    private void radioTodasLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodasLocacoesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_radioTodosLocacoesActionPerformed
+    }//GEN-LAST:event_radioTodasLocacoesActionPerformed
 
     private void radioLucroMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioLucroMesActionPerformed
         // TODO add your handling code here:
         comboMes.setEnabled(true);
     }//GEN-LAST:event_radioLucroMesActionPerformed
 
-    private void radioEmAtrasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioEmAtrasoActionPerformed
+    private void radioLocacoesEmAtrasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioLocacoesEmAtrasoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_radioEmAtrasoActionPerformed
+    }//GEN-LAST:event_radioLocacoesEmAtrasoActionPerformed
 
     private void comboLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLocacoesActionPerformed
         // TODO add your handling code here:
@@ -271,6 +304,7 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton buttonListar;
     private javax.swing.JComboBox<String> comboLocacoes;
     private javax.swing.JComboBox<String> comboMes;
@@ -279,12 +313,11 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JRadioButton radioEmAtraso;
     private javax.swing.JRadioButton radioFinalizadas;
+    private javax.swing.JRadioButton radioLocacoesEmAtraso;
     private javax.swing.JRadioButton radioLucroMes;
     private javax.swing.JRadioButton radioNaoFinalizadas;
-    private javax.swing.JRadioButton radioSeguros;
-    private javax.swing.JRadioButton radioTodosLocacoes;
-    private javax.swing.JTextArea textListagens;
+    private javax.swing.JRadioButton radioTodasLocacoes;
+    private javax.swing.JTextArea textAreaListagens;
     // End of variables declaration//GEN-END:variables
 }

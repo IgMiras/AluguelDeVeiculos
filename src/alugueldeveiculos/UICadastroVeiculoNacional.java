@@ -4,6 +4,10 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laís Isabella
@@ -319,6 +323,28 @@ public class UICadastroVeiculoNacional extends javax.swing.JDialog {
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
+        
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
+        String tipoVeiculo = "nacional";
+        String nomeModelo = textNomeModelo.getText();
+        String montadora = textMontadora.getText();
+        int anoFabricação = Integer.parseInt(textAnoFabricacao.getText());
+        int anoModelo = Integer.parseInt(textAnoModelo.getText());
+        String placa = textPlaca.getText();
+        String categoria = textCategoria.getText();
+        float valorFipe = Integer.parseInt(textValorFipe.getText());
+        float valorDiaria = Float.parseFloat(textValorDiaria.getText());
+        String categoriaCnh = textCategoriaCNHVeiculo.getText();
+        float taxaImpostoEstadual = Float.parseFloat(textTaxaImpostoEstadual.getText());
+        
+        control.addVeiculoNacional(tipoVeiculo, nomeModelo, montadora, anoFabricação, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCnh, taxaImpostoEstadual);
+        JOptionPane.showMessageDialog(jFrame, "Veículo cadastrado com sucesso!");
+        
+        
+        
+        
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void textCategoriaCNHVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCategoriaCNHVeiculoActionPerformed

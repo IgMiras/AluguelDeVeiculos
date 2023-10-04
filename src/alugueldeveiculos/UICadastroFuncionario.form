@@ -46,21 +46,21 @@
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="textCPF" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textCpf" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="textCPF2" min="-2" pref="164" max="-2" attributes="0"/>
+                              <Component id="textRg" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="textEndereço" alignment="0" min="-2" pref="365" max="-2" attributes="0"/>
+                              <Component id="textEndereco" alignment="0" min="-2" pref="365" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="textCEP" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
+                              <Component id="textCep" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                               <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
@@ -116,8 +116,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="textCPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textCPF2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textRg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -125,13 +125,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="textEndereço" min="-2" max="-2" attributes="0"/>
+              <Component id="textEndereco" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textCEP" min="-2" max="-2" attributes="0"/>
+                      <Component id="textCep" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -196,9 +196,9 @@
         <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textCPF">
+    <Component class="javax.swing.JTextField" name="textCpf">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCPFActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCpfActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -217,9 +217,9 @@
         <Property name="text" type="java.lang.String" value="Data de Nascimento"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textCPF2">
+    <Component class="javax.swing.JTextField" name="textRg">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCPF2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textRgActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textNascimento">
@@ -235,9 +235,9 @@
         <Property name="text" type="java.lang.String" value="Endere&#xe7;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textEndere&#xe7;o">
+    <Component class="javax.swing.JTextField" name="textEndereco">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textEndere&#xe7;oActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textEnderecoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -248,9 +248,9 @@
         <Property name="text" type="java.lang.String" value="CEP"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textCEP">
+    <Component class="javax.swing.JTextField" name="textCep">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCEPActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCepActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">

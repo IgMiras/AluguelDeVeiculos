@@ -4,6 +4,10 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laís Isabella
@@ -29,16 +33,16 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonListar = new javax.swing.JButton();
-        radioFuncionariosMes = new javax.swing.JRadioButton();
+        radioFuncionarioDoMes = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textListagens = new javax.swing.JTextArea();
+        textAreaListagens = new javax.swing.JTextArea();
         jSeparator2 = new javax.swing.JSeparator();
-        radioTodos = new javax.swing.JRadioButton();
+        radioTodosSeguros = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        radioTodos1 = new javax.swing.JRadioButton();
+        radioFuncionariosCadastrados = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -51,32 +55,33 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
             }
         });
 
-        buttonGroup1.add(radioFuncionariosMes);
-        radioFuncionariosMes.setText("Funcionário do mês ");
+        buttonGroup1.add(radioFuncionarioDoMes);
+        radioFuncionarioDoMes.setText("Funcionários do mês ");
 
         jLabel2.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel2.setText("Selecione qual relatório você deseja listar:");
 
-        textListagens.setColumns(20);
-        textListagens.setRows(5);
-        jScrollPane1.setViewportView(textListagens);
+        textAreaListagens.setEditable(false);
+        textAreaListagens.setColumns(20);
+        textAreaListagens.setRows(5);
+        jScrollPane1.setViewportView(textAreaListagens);
 
-        buttonGroup1.add(radioTodos);
-        radioTodos.setText("Todos o seguros Cadastrados");
-        radioTodos.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(radioTodosSeguros);
+        radioTodosSeguros.setText("Todos o seguros Cadastrados");
+        radioTodosSeguros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioTodosActionPerformed(evt);
+                radioTodosSegurosActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Source Sans Pro Light", 1, 18)); // NOI18N
         jLabel1.setText("Seguros");
 
-        buttonGroup1.add(radioTodos1);
-        radioTodos1.setText("Funcionários Cadastrados");
-        radioTodos1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(radioFuncionariosCadastrados);
+        radioFuncionariosCadastrados.setText("Funcionários Cadastrados");
+        radioFuncionariosCadastrados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioTodos1ActionPerformed(evt);
+                radioFuncionariosCadastradosActionPerformed(evt);
             }
         });
 
@@ -102,9 +107,9 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
                                     .addComponent(jSeparator3)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(radioFuncionariosMes)
-                                            .addComponent(radioTodos)
-                                            .addComponent(radioTodos1)
+                                            .addComponent(radioFuncionarioDoMes)
+                                            .addComponent(radioTodosSeguros)
+                                            .addComponent(radioFuncionariosCadastrados)
                                             .addComponent(jLabel1)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(36, 36, 36)
@@ -134,15 +139,15 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(radioTodos1)
+                        .addComponent(radioFuncionariosCadastrados)
                         .addGap(12, 12, 12)
-                        .addComponent(radioFuncionariosMes)
+                        .addComponent(radioFuncionarioDoMes)
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(radioTodos)
+                        .addComponent(radioTodosSeguros)
                         .addGap(45, 45, 45)
                         .addComponent(buttonListar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE))
@@ -158,15 +163,30 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
 
     private void buttonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListarActionPerformed
         // TODO add your handling code here:
+        
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
+        if(radioFuncionariosCadastrados.isSelected()){
+            textAreaListagens.setText(control.ListarTodosFuncionariosCadastrados());
+        } else
+            if(radioFuncionarioDoMes.isSelected()){
+                textAreaListagens.setText(control.ListarFuncionariosDoMes());
+            } else 
+                if(radioTodosSeguros.isSelected()){
+                    textAreaListagens.setText(control.ListarTodosSeguros());
+                } else {
+                    JOptionPane.showMessageDialog(jFrame, "Selecione algum opção de listagem!");
+                }
     }//GEN-LAST:event_buttonListarActionPerformed
 
-    private void radioTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosActionPerformed
+    private void radioTodosSegurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosSegurosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_radioTodosActionPerformed
+    }//GEN-LAST:event_radioTodosSegurosActionPerformed
 
-    private void radioTodos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodos1ActionPerformed
+    private void radioFuncionariosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFuncionariosCadastradosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_radioTodos1ActionPerformed
+    }//GEN-LAST:event_radioFuncionariosCadastradosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,10 +221,7 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
             public void run() {
                 UIListagensFuncionarios dialog = new UIListagensFuncionarios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
+                    
                 });
                 dialog.setVisible(true);
             }
@@ -222,9 +239,9 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JRadioButton radioFuncionariosMes;
-    private javax.swing.JRadioButton radioTodos;
-    private javax.swing.JRadioButton radioTodos1;
-    private javax.swing.JTextArea textListagens;
+    private javax.swing.JRadioButton radioFuncionarioDoMes;
+    private javax.swing.JRadioButton radioFuncionariosCadastrados;
+    private javax.swing.JRadioButton radioTodosSeguros;
+    private javax.swing.JTextArea textAreaListagens;
     // End of variables declaration//GEN-END:variables
 }

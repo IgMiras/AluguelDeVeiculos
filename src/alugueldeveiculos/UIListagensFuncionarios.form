@@ -39,9 +39,9 @@
                                   <Component id="jSeparator3" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="radioFuncionariosMes" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="radioTodos" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="radioTodos1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="radioFuncionarioDoMes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="radioTodosSeguros" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="radioFuncionariosCadastrados" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -83,15 +83,15 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="radioTodos1" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioFuncionariosCadastrados" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="radioFuncionariosMes" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioFuncionarioDoMes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="radioTodos" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioTodosSeguros" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="buttonListar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="51" max="32767" attributes="0"/>
@@ -116,12 +116,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonListarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="radioFuncionariosMes">
+    <Component class="javax.swing.JRadioButton" name="radioFuncionarioDoMes">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio do m&#xea;s "/>
+        <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios do m&#xea;s "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -141,8 +141,9 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="textListagens">
+        <Component class="javax.swing.JTextArea" name="textAreaListagens">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
@@ -151,7 +152,7 @@
     </Container>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
-    <Component class="javax.swing.JRadioButton" name="radioTodos">
+    <Component class="javax.swing.JRadioButton" name="radioTodosSeguros">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
@@ -159,7 +160,7 @@
         <Property name="text" type="java.lang.String" value="Todos o seguros Cadastrados"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioTodosActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioTodosSegurosActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -172,7 +173,7 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator3">
     </Component>
-    <Component class="javax.swing.JRadioButton" name="radioTodos1">
+    <Component class="javax.swing.JRadioButton" name="radioFuncionariosCadastrados">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
@@ -180,7 +181,7 @@
         <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios Cadastrados"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioTodos1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioFuncionariosCadastradosActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

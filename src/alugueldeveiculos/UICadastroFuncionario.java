@@ -4,6 +4,10 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laís Isabella
@@ -31,15 +35,15 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         textNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        textCPF = new javax.swing.JTextField();
+        textCpf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        textCPF2 = new javax.swing.JTextField();
+        textRg = new javax.swing.JTextField();
         textNascimento = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        textEndereço = new javax.swing.JTextField();
+        textEndereco = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        textCEP = new javax.swing.JTextField();
+        textCep = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         textEmail = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -72,9 +76,9 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel3.setText("Nome");
 
-        textCPF.addActionListener(new java.awt.event.ActionListener() {
+        textCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCPFActionPerformed(evt);
+                textCpfActionPerformed(evt);
             }
         });
 
@@ -84,9 +88,9 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel5.setText("Data de Nascimento");
 
-        textCPF2.addActionListener(new java.awt.event.ActionListener() {
+        textRg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCPF2ActionPerformed(evt);
+                textRgActionPerformed(evt);
             }
         });
 
@@ -99,18 +103,18 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel6.setText("Endereço");
 
-        textEndereço.addActionListener(new java.awt.event.ActionListener() {
+        textEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textEndereçoActionPerformed(evt);
+                textEnderecoActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel7.setText("CEP");
 
-        textCEP.addActionListener(new java.awt.event.ActionListener() {
+        textCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCEPActionPerformed(evt);
+                textCepActionPerformed(evt);
             }
         });
 
@@ -175,18 +179,18 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(textCPF, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(textCpf, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGap(37, 37, 37)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
-                                .addComponent(textCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textEndereço, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textEndereco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textCEP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textCep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
@@ -227,21 +231,21 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,25 +274,25 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textNomeActionPerformed
 
-    private void textCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCPFActionPerformed
+    private void textCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCPFActionPerformed
+    }//GEN-LAST:event_textCpfActionPerformed
 
-    private void textCPF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCPF2ActionPerformed
+    private void textRgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRgActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCPF2ActionPerformed
+    }//GEN-LAST:event_textRgActionPerformed
 
     private void textNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNascimentoActionPerformed
 
-    private void textEndereçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEndereçoActionPerformed
+    private void textEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEnderecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textEndereçoActionPerformed
+    }//GEN-LAST:event_textEnderecoActionPerformed
 
-    private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
+    private void textCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCepActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCEPActionPerformed
+    }//GEN-LAST:event_textCepActionPerformed
 
     private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailActionPerformed
         // TODO add your handling code here:
@@ -308,6 +312,35 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
+        
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
+        String nome = textNome.getText();
+        String cpf = textCpf.getText();
+        String rg = textRg.getText();
+        String dataNascimento = textNascimento.getText();
+        String endereco = textEndereco.getText();
+        String cep = textCep.getText();
+        String email = textEmail.getText();
+        float salario = Float.parseFloat(textSalario.getText()) ;
+        String pis = textPIS.getText();
+        String dataAdmissao = textAdmissao.getText();
+        
+        
+        control.addFuncionario(nome, cpf, rg, dataNascimento, endereco, cep, email, salario, pis, dataAdmissao);
+        
+        JOptionPane.showMessageDialog(jFrame, "Funcionário cadastrado com sucesso!");
+        textNome.setEditable(false);
+        textCpf.setEditable(false);
+        textRg.setEditable(false);
+        textNascimento.setEditable(false);
+        textEndereco.setEditable(false);
+        textCep.setEditable(false);
+        textEmail.setEditable(false);
+        textSalario.setEditable(false);
+        textPIS.setEditable(false);
+        textAdmissao.setEditable(false); 
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     /**
@@ -343,10 +376,7 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
             public void run() {
                 UICadastroFuncionario dialog = new UICadastroFuncionario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
+                    
                 });
                 dialog.setVisible(true);
             }
@@ -367,14 +397,14 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField textAdmissao;
-    private javax.swing.JTextField textCEP;
-    private javax.swing.JTextField textCPF;
-    private javax.swing.JTextField textCPF2;
+    private javax.swing.JTextField textCep;
+    private javax.swing.JTextField textCpf;
     private javax.swing.JTextField textEmail;
-    private javax.swing.JTextField textEndereço;
+    private javax.swing.JTextField textEndereco;
     private javax.swing.JTextField textNascimento;
     private javax.swing.JTextField textNome;
     private javax.swing.JTextField textPIS;
+    private javax.swing.JTextField textRg;
     private javax.swing.JTextField textSalario;
     // End of variables declaration//GEN-END:variables
 }

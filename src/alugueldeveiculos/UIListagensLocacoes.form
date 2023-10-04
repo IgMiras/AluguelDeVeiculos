@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -36,8 +40,7 @@
                           <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="radioSeguros" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="radioTodosLocacoes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="radioTodasLocacoes" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="buttonListar" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -50,7 +53,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="radioEmAtraso" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="radioLocacoesEmAtraso" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="radioNaoFinalizadas" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -80,7 +83,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="radioTodosLocacoes" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioTodasLocacoes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="radioLucroMes" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -94,10 +97,8 @@
                           <Component id="comboLocacoes" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="radioEmAtraso" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="radioSeguros" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="45" max="32767" attributes="0"/>
+                      <Component id="radioLocacoesEmAtraso" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="83" max="32767" attributes="0"/>
                       <Component id="buttonListar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -109,14 +110,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JRadioButton" name="radioSeguros">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tipos de Seguros"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioSegurosActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -124,8 +117,9 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="textListagens">
+        <Component class="javax.swing.JTextArea" name="textAreaListagens">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
@@ -160,16 +154,22 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonListarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="radioTodosLocacoes">
+    <Component class="javax.swing.JRadioButton" name="radioTodasLocacoes">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Toodas as Loca&#xe7;&#xf5;es Realizadas"/>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Todas as Loca&#xe7;&#xf5;es Realizadas"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioTodosLocacoesActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioTodasLocacoesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioLucroMes">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Loca&#xe7;&#xf5;es e Lucro do m&#xea;s"/>
       </Properties>
       <Events>
@@ -178,23 +178,32 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioFinalizadas">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Loca&#xe7;&#xf5;es Finalizadas"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioNaoFinalizadas">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Loca&#xe7;&#xf5;es n&#xe3;o Finalizadas"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioNaoFinalizadasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="radioEmAtraso">
+    <Component class="javax.swing.JRadioButton" name="radioLocacoesEmAtraso">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Loca&#xe7;&#xf5;es em Atraso"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioEmAtrasoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioLocacoesEmAtrasoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboMes">
@@ -224,11 +233,10 @@
     <Component class="javax.swing.JComboBox" name="comboLocacoes">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="3">
             <StringItem index="0" value="Geral"/>
             <StringItem index="1" value="Nacional"/>
             <StringItem index="2" value="Importado"/>
-            <StringItem index="3" value=" "/>
           </StringArray>
         </Property>
         <Property name="enabled" type="boolean" value="false"/>

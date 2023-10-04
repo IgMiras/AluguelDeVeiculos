@@ -13,7 +13,8 @@ public class VeiculoNacional extends Veiculo{
     
     public VeiculoNacional(){}
     
-    public VeiculoNacional(String tipoVeiculo, String nomeModelo, String montadora, int anoFabricacao, int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria, float taxaImpostoEstadual) {
+    public VeiculoNacional(String tipoVeiculo, String nomeModelo, String montadora, int anoFabricacao, 
+            int anoModelo, String placa, String categoria, float valorFipe, float valorDiaria, String categoriaCNHNecessaria, float taxaImpostoEstadual) {
         super(tipoVeiculo, nomeModelo, montadora, anoFabricacao, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCNHNecessaria);
         this.taxaImpostoEstadual = taxaImpostoEstadual;
     }
