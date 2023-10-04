@@ -189,114 +189,234 @@ public class LocadoraDeVeiculos {
         System.out.println("Cliente nao possui Categoria CNH necessaria");
     }
     
-    public ArrayList<Veiculo> listarTodosVeiculos(){
+    public String listarTodosVeiculos(){
         VeiculoDAO veicDAO = new VeiculoDAO();
-        return veicDAO.listarTodosVeiculos();
+        String relatorio = "";
+        for (Veiculo veic : veicDAO.listarTodosVeiculos()){
+            if(veic instanceof VeiculoNacional){
+                VeiculoNacional vn = (VeiculoNacional) veic;
+                relatorio = relatorio + vn.toString();
+            } else {
+                VeiculoImportado vi = (VeiculoImportado) veic;
+                relatorio = relatorio + vi.toString();
+            }
+        }
+        return relatorio;
     }
     
-    public ArrayList<Veiculo> listarTodosVeiculosNacionais(){
+    public String listarTodosVeiculosNacionais(){
         VeiculoDAO veicDAO = new VeiculoDAO();
-        return veicDAO.listarTodosVeiculosNacionais();
+        String relatorio = "";
+        for (Veiculo veic: veicDAO.listarTodosVeiculosNacionais()){
+            VeiculoNacional vn = (VeiculoNacional) veic;
+            relatorio = relatorio + vn.toString();
+        }
+        return relatorio;
     }
 
-    public ArrayList<Veiculo> listarTodosVeiculosImportados(){
+    public String listarTodosVeiculosImportados(){
         VeiculoDAO veicDAO = new VeiculoDAO();
-        return veicDAO.listarTodosVeiculosImportados();
+        String relatorio = "";
+        for (Veiculo veic: veicDAO.listarTodosVeiculosImportados()){
+            VeiculoImportado vi = (VeiculoImportado) veic;
+            relatorio = relatorio + vi.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Veiculo> listarTodosVeiculosDisponiveis(){
+    public String listarTodosVeiculosDisponiveis(){
         VeiculoDAO veicDAO = new VeiculoDAO();
-        return veicDAO.listarTodosVeiculosDisponiveis();
+        String relatorio = "";
+        for (Veiculo veic : veicDAO.listarTodosVeiculosDisponiveis()){
+            if(veic instanceof VeiculoNacional){
+                VeiculoNacional vn = (VeiculoNacional) veic;
+                relatorio = relatorio + vn.toString();
+            } else {
+                VeiculoImportado vi = (VeiculoImportado) veic;
+                relatorio = relatorio + vi.toString();
+            }
+        }
+        return relatorio;
     }
     
-    public ArrayList<Veiculo> listarVeiculosDisponiveisCNHEspecifica(String categoriaCNH) {
+    public String listarVeiculosDisponiveisCNHEspecifica(String categoriaCNH) {
         VeiculoDAO veicDAO = new VeiculoDAO();
-        return veicDAO.listarVeiculosDisponiveisCNHEspecifica(categoriaCNH);
+        String relatorio = "";
+        for (Veiculo veic : veicDAO.listarVeiculosDisponiveisCNHEspecifica(categoriaCNH)){
+            if(veic instanceof VeiculoNacional){
+                VeiculoNacional vn = (VeiculoNacional) veic;
+                relatorio = relatorio + vn.toString();
+            } else {
+                VeiculoImportado vi = (VeiculoImportado) veic;
+                relatorio = relatorio + vi.toString();
+            }
+        }
+        return relatorio;
     }
     
-    public ArrayList<Veiculo> listarTodosVeiculosAlugados(){
+    public String listarTodosVeiculosAlugados(){
         VeiculoDAO veicDAO = new VeiculoDAO();
-        return veicDAO.listarTodosVeiculosAlugados();
+        String relatorio = "";
+        for (Veiculo veic : veicDAO.listarTodosVeiculosAlugados()){
+            if(veic instanceof VeiculoNacional){
+                VeiculoNacional vn = (VeiculoNacional) veic;
+                relatorio = relatorio + vn.toString();
+            } else {
+                VeiculoImportado vi = (VeiculoImportado) veic;
+                relatorio = relatorio + vi.toString();
+            }
+        }
+        return relatorio;
     }
     
-    public ArrayList<Veiculo> listarTodosVeiculosComAtrasoDevolucao(){
+    public String listarTodosVeiculosComAtrasoDevolucao(){
         VeiculoDAO veicDAO = new VeiculoDAO();
-        return veicDAO.listarTodosVeiculosComAtrasoDevolucao();
+        String relatorio = "";
+        for (Veiculo veic : veicDAO.listarTodosVeiculosAlugados()){
+            if(veic instanceof VeiculoNacional){
+                VeiculoNacional vn = (VeiculoNacional) veic;
+                relatorio = relatorio + vn.toString();
+            } else {
+                VeiculoImportado vi = (VeiculoImportado) veic;
+                relatorio = relatorio + vi.toString();
+            }
+        }
+        return relatorio;
     }
     
-    public ArrayList<Cliente> listarClientesAlugaramVeiculoEspecifico(int codigoVeiculo) {
+    public String listarClientesAlugaramVeiculoEspecifico(int codigoVeiculo) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.listarClientesAlugaramVeiculoEspecifico(codigoVeiculo);
+        String relatorio = "";
+        for (Cliente cliente : clienteDAO.listarClientesAlugaramVeiculoEspecifico(codigoVeiculo)){
+            relatorio = relatorio + cliente.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Funcionario> listarTodosFuncionarios(){
+    public String listarTodosFuncionarios(){
         FuncionarioDAO funcDAO = new FuncionarioDAO();
-        return funcDAO.listarTodosFuncionarios();
+        String relatorio = "";
+        for (Funcionario func : funcDAO.listarTodosFuncionarios()){
+            relatorio = relatorio + func.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Funcionario> listarFuncionariosDoMes(){
+    public String listarFuncionariosDoMes(){
         FuncionarioDAO funcDAO = new FuncionarioDAO();
-        return funcDAO.listarFuncionariosDoMes();
+        String relatorio = "";
+        for (Funcionario func : funcDAO.listarFuncionariosDoMes()){
+            relatorio = relatorio + func.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Cliente> listarTodosClientes() {
+    public String listarTodosClientes() {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.listarTodosClientes();
+        String relatorio = "";
+        for (Cliente cliente : clienteDAO.listarTodosClientes()){
+            relatorio = relatorio + cliente.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> listarTodasLocacoesClienteEspecifico(int codigoCliente) {
+    public String listarTodasLocacoesClienteEspecifico(int codigoCliente) {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoesClienteEspecifico(codigoCliente);
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoesClienteEspecifico(codigoCliente)){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Cliente> listarClientesLocacaoAtraso() {
+    public String listarClientesLocacaoAtraso() {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.listarClientesLocacaoAtraso();
+        String relatorio = "";
+        for (Cliente cliente : clienteDAO.listarClientesLocacaoAtraso()){
+            relatorio = relatorio + cliente.toString();
+        }
+        return relatorio;
     }   
     
-    public ArrayList<Locacao> listarTodasLocacoes() {
+    public String listarTodasLocacoes() {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoes();
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoes()){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> listarTodasLocacoesMesEspecifico(int mes) {
+    public String listarTodasLocacoesMesEspecifico(int mes) {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoesMesEspecifico(mes);
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoesMesEspecifico(mes)){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> lucroTotalMesEspecifico(int mes) {
+    public String lucroTotalMesEspecifico(int mes) {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.lucroTotalMesEspecifico(mes);
+        String relatorio = "";
+        for (Locacao loc : locDAO.lucroTotalMesEspecifico(mes)){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> listarTodasLocacoesFinalizadas() {
+    public String listarTodasLocacoesFinalizadas() {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoesFinalizadas();
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoesFinalizadas()){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadas() {
+    public String listarTodasLocacoesNaoFinalizadas() {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoesNaoFinalizadas();
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadas()){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadasVeiculosNacionais() {
+    public String listarTodasLocacoesNaoFinalizadasVeiculosNacionais() {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoesNaoFinalizadasVeiculosNacionais();
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadasVeiculosNacionais()){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> listarTodasLocacoesNaoFinalizadasVeiculosImportados() {
+    public String listarTodasLocacoesNaoFinalizadasVeiculosImportados() {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoesNaoFinalizadasVeiculosImportados();
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadasVeiculosImportados()){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Locacao> listarTodasLocacoesEmAtaso() {
+    public String listarTodasLocacoesEmAtaso() {
         LocacaoDAO locDAO = new LocacaoDAO();
-        return locDAO.listarTodasLocacoesEmAtraso();
+        String relatorio = "";
+        for (Locacao loc : locDAO.listarTodasLocacoesEmAtraso()){
+            relatorio = relatorio + loc.toString();
+        }
+        return relatorio;
     }
     
-    public ArrayList<Seguro> listarTodosSeguros() {
+    public String listarTodosSeguros() {
         SeguroDAO segDAO = new SeguroDAO();
-        return segDAO.listarTodosSeguros();
+        String relatorio = "";
+        for (Seguro seg : segDAO.listarTodosSeguros()){
+            relatorio = relatorio + seg.toString();
+        }
+        return relatorio;
     }
     
     

@@ -156,7 +156,11 @@ public class Locacao {
 
     @Override
     public String toString() {
-        return "Locacao{" + "formatter=" + formatter + ", codigoLocacao=" + codigoLocacao + ", codigoCliente=" + codigoCliente + ", codigoFuncionario=" + codigoFuncionario + ", veiculo=" + veiculo + ", dataLocacao=" + dataLocacao + ", dataDevolucao=" + dataDevolucao + ", valorTotal=" + valorTotal + ", tipoPagamento=" + tipoPagamento + ", segurosContratados=" + segurosContratados + ", finalizada=" + finalizada + '}';
+        return "Locacao{" + "formatter=" + formatter + ", codigoLocacao=" + codigoLocacao +
+                ", codigoCliente=" + codigoCliente + ", codigoFuncionario=" + codigoFuncionario +
+                ", veiculo=" + veiculo.toString() + ", dataLocacao=" + dataLocacao +
+                ", dataDevolucao=" + dataDevolucao + ", valorTotal=" + valorTotal + ", tipoPagamento=" + tipoPagamento +
+                ", segurosContratados=" + segurosContratados + ", finalizada=" + finalizada + '}';
     }
     
     
