@@ -152,7 +152,17 @@ public abstract class Veiculo {
 
     @Override
     public String toString() {
-        return "codigoVeiculo=" + codigoVeiculo + ", nomeModelo=" + nomeModelo + ", montadora=" + montadora + ", anoFabricacao=" + anoFabricacao + ", anoModelo=" + anoModelo + ", placa=" + placa + ", categoria=" + categoria + ", valorFipe=" + valorFipe + ", valorDiaria=" + valorDiaria + ", categoriaCNHNecessaria=" + categoriaCNHNecessaria + ", alugado=" + alugado;
+        return "Código do véiculo: " + codigoVeiculo + 
+                "\nNome Modelo: " + nomeModelo + 
+                "\nMontadora: " + montadora + 
+                "\nAno de Fabricacao: " + anoFabricacao + 
+                "\nAno do Modelo: " + anoModelo +
+                "\nPlaca: " + placa +
+                "\nCategoria: " + categoria + 
+                "\nValor Fipe: " + valorFipe + 
+                "\nValor da Diaria=" + valorDiaria + 
+                "\nCategoria de CNH Necessaria: " + categoriaCNHNecessaria + 
+                "\nAlugado: " + alugado;
     }
     
     public abstract float getTaxaImpostoEstadual();

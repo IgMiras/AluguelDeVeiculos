@@ -65,8 +65,6 @@ public class UICadastroFuncionario extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel2.setText("CPF");
 
-        textNome.setBackground(new java.awt.Color(255, 255, 255));
-        textNome.setForeground(new java.awt.Color(204, 204, 204));
         textNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNomeActionPerformed(evt);

@@ -4,13 +4,7 @@
  */
 package alugueldeveiculos;
 
-import java.sql.Connection;
-import connection.Conexao;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.time.Period;
 import models.LocadoraDeVeiculos;
-import models.Seguro;
 
 /**
  *
@@ -28,6 +22,8 @@ public class AluguelDeVeiculos {
                 new UIPrincipal().setVisible(true);
             }
         });
+        
+   
         LocadoraDeVeiculos locadora = LocadoraDeVeiculos.getInstancia("AluguelDeVeiculos"
             , "R. Osvaldo Peretti, 98. Jardim das Rosas. Presidente Prudente - SP"
             , "www.alugueldeveiculos.com.br"
@@ -55,7 +51,7 @@ public class AluguelDeVeiculos {
                 "11/05/2025", true);
         */
         
-        
+     //   System.out.println(locadora.ListarFuncionariosDoMes());
     }
     
 }

@@ -188,14 +188,17 @@ public class UIListagensClientes extends javax.swing.JDialog {
 
     private void radioTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioTodosActionPerformed
 
     private void radioClientesAtrasadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioClientesAtrasadosActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioClientesAtrasadosActionPerformed
 
     private void radioHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioHistoricoActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
         if(!(radioHistorico.isSelected())){
         textClienteNome.setEditable(false);
         } else {

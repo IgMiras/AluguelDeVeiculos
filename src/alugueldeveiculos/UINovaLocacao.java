@@ -4,6 +4,19 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import models.Cartao;
+import models.Dinheiro;
+import models.Pagamento;
+import models.Seguro;
+import models.Veiculo;
+import models.VeiculoImportado;
+import models.VeiculoNacional;
+
 /**
  *
  * @author Laís Isabella
@@ -15,6 +28,23 @@ public class UINovaLocacao extends javax.swing.JFrame {
      */
     public UINovaLocacao() {
         initComponents();
+
+        if (!(radioDinheiro.isSelected())) {
+            labelQtd.setVisible(false);
+            textQtdCedulas.setVisible(false);
+        }
+
+        if (!(radioCartao.isSelected())) {
+            labelNome.setVisible(false);
+            labelBandeira.setVisible(false);
+            labelNumero.setVisible(false);
+            labelCCV.setVisible(false);
+            textNomeCartao.setVisible(false);
+            textBandeiraCartao.setVisible(false);
+            textNumCartao.setVisible(false);
+            textCCV.setVisible(false);
+        }
+
     }
 
     /**
@@ -27,21 +57,65 @@ public class UINovaLocacao extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        textQtdDinheiro = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        textValorTotal = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        textDataDevolucaoLocacao = new javax.swing.JTextField();
+        textDataDevolucao = new javax.swing.JTextField();
         textCodCliente = new javax.swing.JTextField();
-        buttonProximo = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        comboSeguros = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         textDataLocacao = new javax.swing.JTextField();
         textLocalRetirada = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        textCodFunc = new javax.swing.JTextField();
+        textCodFuncionario = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        radioDinheiro = new javax.swing.JRadioButton();
+        radioCartao = new javax.swing.JRadioButton();
+        textCCV = new javax.swing.JTextField();
+        buttonFinalizar = new javax.swing.JButton();
+        labelNome = new javax.swing.JLabel();
+        textNomeCartao = new javax.swing.JTextField();
+        labelBandeira = new javax.swing.JLabel();
+        textBandeiraCartao = new javax.swing.JTextField();
+        labelNumero = new javax.swing.JLabel();
+        textNumCartao = new javax.swing.JTextField();
+        labelCCV = new javax.swing.JLabel();
+        textQtdCedulas = new javax.swing.JTextField();
+        labelQtd = new javax.swing.JLabel();
+        radioAntiFurto = new javax.swing.JRadioButton();
+        radioAcidente = new javax.swing.JRadioButton();
+        jLabel16 = new javax.swing.JLabel();
+        textCodVeiculo = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+
+        textQtdDinheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textQtdDinheiroActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Source Sans Pro Light", 1, 18)); // NOI18N
+        jLabel11.setText("Dinheiro");
+
+        jLabel13.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jLabel13.setText("Quantidade de cédulas:");
+
+        jLabel8.setText("Valor Total: ");
+
+        textValorTotal.setEditable(false);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        jLabel9.setText("R$");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Locação");
@@ -49,36 +123,20 @@ public class UINovaLocacao extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Source Sans Pro Light", 1, 24)); // NOI18N
         jLabel3.setText("Nova Locação");
 
-        textDataDevolucaoLocacao.addActionListener(new java.awt.event.ActionListener() {
+        textDataDevolucao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textDataDevolucaoLocacaoActionPerformed(evt);
+                textDataDevolucaoActionPerformed(evt);
             }
         });
 
-        textCodCliente.setBackground(new java.awt.Color(255, 255, 255));
-        textCodCliente.setForeground(new java.awt.Color(204, 204, 204));
         textCodCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textCodClienteActionPerformed(evt);
             }
         });
 
-        buttonProximo.setText("PROXIMO");
-        buttonProximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonProximoActionPerformed(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel6.setText("Adicionar Seguro");
-
-        comboSeguros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seguro 1", "Seguro 2", "Seguro 3" }));
-        comboSeguros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboSegurosActionPerformed(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel10.setText("Código Cliente");
@@ -101,9 +159,9 @@ public class UINovaLocacao extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel4.setText("Data Devolução");
 
-        textCodFunc.addActionListener(new java.awt.event.ActionListener() {
+        textCodFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCodFuncActionPerformed(evt);
+                textCodFuncionarioActionPerformed(evt);
             }
         });
 
@@ -113,55 +171,201 @@ public class UINovaLocacao extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel2.setText("Data Locação");
 
+        jLabel7.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jLabel7.setText("Escolha qual será a forma de pagamento:");
+
+        jLabel1.setFont(new java.awt.Font("Source Sans Pro Light", 1, 18)); // NOI18N
+        jLabel1.setText("Pagamento");
+
+        buttonGroup1.add(radioDinheiro);
+        radioDinheiro.setText("Dinheiro");
+        radioDinheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioDinheiroActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioCartao);
+        radioCartao.setText("Cartão");
+        radioCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioCartaoActionPerformed(evt);
+            }
+        });
+
+        textCCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textCCVActionPerformed(evt);
+            }
+        });
+
+        buttonFinalizar.setText("FINALIZAR");
+        buttonFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFinalizarActionPerformed(evt);
+            }
+        });
+
+        labelNome.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        labelNome.setText("Nome");
+
+        textNomeCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textNomeCartaoActionPerformed(evt);
+            }
+        });
+
+        labelBandeira.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        labelBandeira.setText("Bandeira");
+
+        textBandeiraCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textBandeiraCartaoActionPerformed(evt);
+            }
+        });
+
+        labelNumero.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        labelNumero.setText("Numero");
+
+        textNumCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textNumCartaoActionPerformed(evt);
+            }
+        });
+
+        labelCCV.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        labelCCV.setText("CCV");
+
+        textQtdCedulas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textQtdCedulasActionPerformed(evt);
+            }
+        });
+
+        labelQtd.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        labelQtd.setText("Quantidade de cédulas:");
+
+        radioAntiFurto.setText("Anti-Furto");
+
+        radioAcidente.setText("Acidente");
+
+        jLabel16.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
+        jLabel16.setText("Código do Veículo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(168, 168, 168)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelNome)
+                                            .addComponent(textNomeCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelBandeira)
+                                            .addComponent(textBandeiraCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelNumero)
+                                            .addComponent(textNumCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelCCV)
+                                            .addComponent(textCCV, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(textQtdCedulas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(radioDinheiro)
+                                                    .addComponent(labelQtd))
+                                                .addGap(11, 11, 11)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(radioCartao)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(buttonFinalizar)
+                                .addGap(131, 131, 131))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jSeparator3)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSeparator2)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(0, 0, Short.MAX_VALUE)
+                                            .addComponent(textLocalRetirada, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(radioAntiFurto))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(167, 167, 167)
+                                            .addComponent(jLabel1)
+                                            .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(radioAcidente))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(textDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(textDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(textCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel10))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel12)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel16))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(textCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(textCodVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel5))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(textCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(textDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(textLocalRetirada, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboSeguros, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textDataDevolucaoLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textCodFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel4)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(buttonProximo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(140, 140, 140)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addComponent(jLabel7)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(233, 233, 233))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(50, 50, 50)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCodFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCodVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -169,43 +373,66 @@ public class UINovaLocacao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textDataDevolucaoLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(textDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textLocalRetirada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboSeguros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(radioAntiFurto)
+                    .addComponent(radioAcidente))
+                .addGap(53, 53, 53)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(buttonProximo)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioDinheiro)
+                    .addComponent(radioCartao))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(labelNome)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(textNomeCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(labelBandeira)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(textBandeiraCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelQtd)
+                        .addGap(18, 18, 18)
+                        .addComponent(textQtdCedulas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelNumero)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textNumCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelCCV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textCCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(48, 48, 48)
+                .addComponent(buttonFinalizar)
+                .addGap(50, 50, 50))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textDataDevolucaoLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDataDevolucaoLocacaoActionPerformed
+    private void textDataDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDataDevolucaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textDataDevolucaoLocacaoActionPerformed
+    }//GEN-LAST:event_textDataDevolucaoActionPerformed
 
     private void textCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textCodClienteActionPerformed
-
-    private void buttonProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProximoActionPerformed
-        // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                UINovaLocacaoPagamento dialog = new UINovaLocacaoPagamento(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_buttonProximoActionPerformed
 
     private void textDataLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDataLocacaoActionPerformed
         // TODO add your handling code here:
@@ -215,13 +442,239 @@ public class UINovaLocacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textLocalRetiradaActionPerformed
 
-    private void textCodFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodFuncActionPerformed
+    private void textCodFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodFuncionarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCodFuncActionPerformed
+    }//GEN-LAST:event_textCodFuncionarioActionPerformed
 
-    private void comboSegurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSegurosActionPerformed
+    private void radioDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDinheiroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboSegurosActionPerformed
+        labelQtd.setVisible(true);
+        textQtdCedulas.setVisible(true);
+
+//        JFrame jFrame = new JFrame();
+//        Controlador control = new Controlador();
+//
+//        int codCliente = Integer.parseInt(textCodCliente.getText());
+//        int codFuncionario = Integer.parseInt(textCodFuncionario.getText());
+//        int codVeiculo = Integer.parseInt(textCodVeiculo.getText());
+//        Veiculo v = control.BuscarVeiculoPorCodigo(codVeiculo);
+//        String dataLocacao = textDataLocacao.getText();
+//        String dataDevolucao = textDataDevolucao.getText();
+//        int seguro1 = 0;
+//        int seguro2 = 0;
+//        ArrayList<Seguro> auxSeguros = control.BuscarTodosSeguros();
+//        ArrayList<Seguro> seguros = new ArrayList();
+//        float valorTotal = 0;
+//        if (radioAntiFurto.isSelected()) {
+//            seguro1 = 1;
+//        }
+//
+//        if (radioAcidente.isSelected()) {
+//            seguro2 = 1;
+//        }
+//        int aux = seguro1 + seguro2;
+//
+//        if (aux == 1) {
+//            if (seguro1 == 1) {
+//                seguros.add(auxSeguros.get(0));
+//            } else {
+//                seguros.add(auxSeguros.get(1));
+//            }
+//        } else {
+//            seguros = auxSeguros;
+//        }
+//
+//        LocalDate auxLocacao = LocalDate.parse(dataLocacao);
+//        LocalDate auxDevolucao = LocalDate.parse(dataDevolucao);
+//
+//        long diferencaEmDias = Math.abs(auxLocacao.toEpochDay() - auxDevolucao.toEpochDay());
+//        float valorSeguros = 0;
+//        for (Seguro seguro : seguros) {
+//            valorSeguros = valorSeguros + seguro.getValor();
+//        }
+//        float valorFinal = diferencaEmDias * v.getValorDiaria() + valorSeguros;
+//        valorTotal = valorFinal;
+//        String valorString = Float.toString(valorTotal);
+//        System.out.println("Chegou aq - valor" + valorString);
+//
+//        if (radioDinheiro.isSelected()) {
+//            textValorTotal.setText(valorString);
+//        }
+
+    }//GEN-LAST:event_radioDinheiroActionPerformed
+
+    private void radioCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCartaoActionPerformed
+        // TODO add your handling code here:
+        labelNome.setVisible(true);
+        labelBandeira.setVisible(true);
+        labelNumero.setVisible(true);
+        labelCCV.setVisible(true);
+        textNomeCartao.setVisible(true);
+        textBandeiraCartao.setVisible(true);
+        textNumCartao.setVisible(true);
+        textCCV.setVisible(true);
+//
+//        JFrame jFrame = new JFrame();
+//        Controlador control = new Controlador();
+//
+//        int codCliente = Integer.parseInt(textCodCliente.getText());
+//        int codFuncionario = Integer.parseInt(textCodFuncionario.getText());
+//        int codVeiculo = Integer.parseInt(textCodVeiculo.getText());
+//
+//        Veiculo v = control.BuscarVeiculoPorCodigo(codVeiculo);
+//
+//        String dataLocacao = textDataLocacao.getText();
+//        String dataDevolucao = textDataDevolucao.getText();
+//        int seguro1 = 0;
+//        int seguro2 = 0;
+//        ArrayList<Seguro> auxSeguros = control.BuscarTodosSeguros();
+//        ArrayList<Seguro> seguros = new ArrayList();
+//        float valorTotal = 0;
+//        if (radioAntiFurto.isSelected()) {
+//            seguro1 = 1;
+//        }
+//
+//        if (radioAcidente.isSelected()) {
+//            seguro2 = 1;
+//        }
+//        int aux = seguro1 + seguro2;
+//
+//        if (aux == 1) {
+//            if (seguro1 == 1) {
+//                seguros.add(auxSeguros.get(0));
+//            } else {
+//                seguros.add(auxSeguros.get(1));
+//            }
+//        } else {
+//            seguros = auxSeguros;
+//        }
+//        
+//        String valorString = "";
+//
+//        LocalDate auxLocacao = LocalDate.parse(dataLocacao);
+//        LocalDate auxDevolucao = LocalDate.parse(dataDevolucao);
+//        if (v.getTipoVeiculo().equalsIgnoreCase("nacional")) {
+//            VeiculoNacional vn = (VeiculoNacional) v;
+//
+//            long diferencaEmDias = Math.abs(auxLocacao.toEpochDay() - auxDevolucao.toEpochDay());
+//            float valorSeguros = 0;
+//            for (Seguro seguro : seguros) {
+//                valorSeguros = valorSeguros + seguro.getValor();
+//            }
+//            float valorFinal = diferencaEmDias * vn.getValorDiaria() + valorSeguros;
+//            valorTotal = valorFinal;
+//            valorString = Float.toString(valorTotal);
+//        } else {
+//            VeiculoImportado vi = (VeiculoImportado) v;
+//            
+//            long diferencaEmDias = Math.abs(auxLocacao.toEpochDay() - auxDevolucao.toEpochDay());
+//        float valorSeguros = 0;
+//        for (Seguro seguro : seguros) {
+//            valorSeguros = valorSeguros + seguro.getValor();
+//        }
+//        float valorFinal = diferencaEmDias * vi.getValorDiaria() + valorSeguros;
+//        valorTotal = valorFinal;
+//        valorString = Float.toString(valorTotal);
+//        }
+//
+//        textValorTotal.setText(valorString);
+
+
+    }//GEN-LAST:event_radioCartaoActionPerformed
+
+    private void textBandeiraCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBandeiraCartaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textBandeiraCartaoActionPerformed
+
+    private void textNomeCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeCartaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNomeCartaoActionPerformed
+
+    private void textCCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCCVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCCVActionPerformed
+
+    private void textNumCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumCartaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNumCartaoActionPerformed
+
+    private void textQtdDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textQtdDinheiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textQtdDinheiroActionPerformed
+
+    private void textQtdCedulasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textQtdCedulasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textQtdCedulasActionPerformed
+
+    private void buttonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFinalizarActionPerformed
+        // TODO add your handling code here:
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+
+        int codCliente = Integer.parseInt(textCodCliente.getText());
+        int codFuncionario = Integer.parseInt(textCodFuncionario.getText());
+        int codVeiculo = Integer.parseInt(textCodVeiculo.getText());
+        String dataLocacao = textDataLocacao.getText();
+        String dataDevolucao = textDataDevolucao.getText();
+        
+        int seguro1 = 0;
+        int seguro2 = 0;
+        
+        if (radioAntiFurto.isSelected()) {
+            seguro1 = 1;
+        }
+
+        if (radioAcidente.isSelected()) {
+            seguro2 = 1;
+        }
+        
+        int aux = seguro1 + seguro2;
+        int[] segurosSelecionados = new int[2];
+        
+        if (aux == 1) {
+            if (seguro1 == 1) {
+                segurosSelecionados[0] = 1;
+                segurosSelecionados[1] = 0;
+            } else {
+                segurosSelecionados[0] = 0;
+                segurosSelecionados[1] = 1;
+            }
+        } else if (aux == 2) {
+            segurosSelecionados[0] = 1;
+            segurosSelecionados[1] = 1;
+        } else if (aux != 1 && aux != 2) {
+            segurosSelecionados[0] = 0;
+            segurosSelecionados[1] = 0;
+        }
+        
+        if (radioDinheiro.isSelected()) {
+
+            int qtd = Integer.parseInt(textQtdCedulas.getText());
+            Pagamento p = new Dinheiro("Dinheiro", qtd);
+            if (control.addLocacao(codCliente, codFuncionario, codVeiculo, dataLocacao, dataDevolucao, "dinheiro", segurosSelecionados) == true) {
+                JOptionPane.showMessageDialog(jFrame, "Locação cadastrada com sucesso!");
+            } else {
+                 JOptionPane.showMessageDialog(jFrame, "Locação não cadastrada");
+            }
+        }
+
+        if (radioCartao.isSelected()) {
+
+            String nomeCartao = textNomeCartao.getText();
+            String bandeira = textBandeiraCartao.getText();
+            String numCartao = textNumCartao.getText();
+            int ccv = Integer.parseInt(textCCV.getText());
+
+            Pagamento p = new Cartao("Cartao", nomeCartao, bandeira, numCartao, ccv);
+
+            if (control.addLocacao(codCliente, codFuncionario, codVeiculo, dataLocacao, dataDevolucao, "dinheiro", segurosSelecionados) == true) {
+                JOptionPane.showMessageDialog(jFrame, "Locação cadastrada com sucesso!");
+            } else {
+                 JOptionPane.showMessageDialog(jFrame, "Locação não cadastrada");
+            }
+        }
+
+    }//GEN-LAST:event_buttonFinalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,21 +713,46 @@ public class UINovaLocacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonProximo;
-    private javax.swing.JComboBox<String> comboSeguros;
+    private javax.swing.JButton buttonFinalizar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel labelBandeira;
+    private javax.swing.JLabel labelCCV;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelNumero;
+    private javax.swing.JLabel labelQtd;
+    private javax.swing.JRadioButton radioAcidente;
+    private javax.swing.JRadioButton radioAntiFurto;
+    private javax.swing.JRadioButton radioCartao;
+    private javax.swing.JRadioButton radioDinheiro;
+    private javax.swing.JTextField textBandeiraCartao;
+    private javax.swing.JTextField textCCV;
     private javax.swing.JTextField textCodCliente;
-    private javax.swing.JTextField textCodFunc;
-    private javax.swing.JTextField textDataDevolucaoLocacao;
+    private javax.swing.JTextField textCodFuncionario;
+    private javax.swing.JTextField textCodVeiculo;
+    private javax.swing.JTextField textDataDevolucao;
     private javax.swing.JTextField textDataLocacao;
     private javax.swing.JTextField textLocalRetirada;
+    private javax.swing.JTextField textNomeCartao;
+    private javax.swing.JTextField textNumCartao;
+    private javax.swing.JTextField textQtdCedulas;
+    private javax.swing.JTextField textQtdDinheiro;
+    private javax.swing.JTextField textValorTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,10 +38,10 @@ public class Cliente extends Usuario {
     public String toString() {
         if (this.clienteOuro == true) {
             return super.toString() + "\nCategoria de CNH: " + this.categoriaCNH + " - Número da CNH: " + this.numeroCNH
-                    + "\nData da validade da CNH: " + this.validadeCNH + "\nCLIENTE OURO";
+                    + "\nData da validade da CNH: " + this.validadeCNH + "\nCLIENTE OURO" + "\n\n";
         } else {
             return super.toString() + "\nCategoria de CNH: " + this.categoriaCNH + " - Número da CNH: " + this.numeroCNH
-                    + "\nData da validade da CNH: " + this.validadeCNH;
+                    + "\nData da validade da CNH: " + this.validadeCNH + "\n\n";
         }
     }
 

@@ -35,7 +35,7 @@ public class Funcionario extends Usuario {
     @Override
     public String toString() {
         return super.toString() + "\nSalário: R$" + this.salario + "\nPis: " + this.pis
-                + "\nData de Admissão: " + this.dataAdmissao;
+                + "\nData de Admissão: " + this.dataAdmissao + "\n\n"; 
     }
 
     public float getSalario() {

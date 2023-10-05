@@ -78,4 +78,35 @@ public class SeguroDAO {
         return seguros;
     }
     
+    public Seguro buscarSeguroPorID(int id){
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            con = conexao.getConexao();
+            stmt = con.prepareStatement("SELECT * FROM seguro WHERE idseguro = ?");
+            stmt.setInt(1,id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Seguro seg = new Seguro();
+                
+                seg.setCodigoSeguro(rs.getInt("idseguro"));
+                seg.setNome(rs.getString("nome"));
+                seg.setTipo(rs.getString("tipo"));
+                seg.setDescricao(rs.getString("descricao"));
+                seg.setValor(rs.getFloat("valor"));
+                
+                return seg;
+            }
+        } catch (SQLException ex) {
+             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+           Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return null;
+    }
+    
 }

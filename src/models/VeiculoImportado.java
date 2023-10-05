@@ -45,7 +45,7 @@ public class VeiculoImportado extends Veiculo{
     
     @Override
     public String toString(){
-        String string = "VeiculoImportado{" + super.toString() + ", taxaImpostoEstadual=" + this.taxaImpostoEstadual + ", taxaImpostoFederal=" + this.taxaImpostoFederal + "}";
+        String string = "Veiculo Importado\n" + super.toString() + "\nTaxa de Imposto Federal: " + this.taxaImpostoFederal + "\n\n";
         return string;
     }
 }

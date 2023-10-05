@@ -171,8 +171,8 @@ public class LocadoraDeVeiculos {
         segDAO.create(seguro);
     }
     
-    public void addLocacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao,
-                           String dataDevolucao, float valorTotal, String tipoPagamento, ArrayList<Seguro> segurosContratados){
+    public boolean addLocacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao,
+                           String dataDevolucao, String tipoPagamento, int[] segurosContratados){
         
         VeiculoDAO veicDAO = new VeiculoDAO();
         Veiculo veic = veicDAO.buscarVeiculo(codigoVeiculo);
@@ -180,13 +180,30 @@ public class LocadoraDeVeiculos {
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente = clienteDAO.buscarClientePorID(codigoCliente);
         
+        
+        ArrayList<Seguro> seguros = new ArrayList<>();
+       
+        for (int i = 0; i < segurosContratados.length; i++) {
+
+            SeguroDAO segDAO = new SeguroDAO();
+            Seguro seg = new Seguro();
+
+            if (segurosContratados[i] == 1) {
+                seg = segDAO.buscarSeguroPorID(i + 1);
+                seguros.add(seg);
+            }
+        }
+        
         if (cliente.getCategoriaCNH().equalsIgnoreCase(veic.getCategoriaCNHNecessaria())){
-            Locacao loc = new Locacao(codigoCliente, codigoFuncionario, veic, dataLocacao, dataDevolucao, valorTotal, tipoPagamento, segurosContratados);
+            Locacao loc = new Locacao(codigoCliente, codigoFuncionario, veic, dataLocacao, dataDevolucao, tipoPagamento, seguros);
             LocacaoDAO locDAO = new LocacaoDAO();
             locDAO.create(loc);
-            return;
+            System.out.println("cadastrado");
+            return true;
+            
         }
         System.out.println("Cliente nao possui Categoria CNH necessaria");
+        return false;
     }
     
     public String ListarTodosVeiculosCadastrados(){
@@ -308,6 +325,7 @@ public class LocadoraDeVeiculos {
         for (Funcionario func : funcDAO.listarFuncionariosDoMes()){
             relatorio = relatorio + func.toString();
         }
+        System.out.println("relatorio: "+relatorio);
         return relatorio;
     }
     
@@ -344,6 +362,7 @@ public class LocadoraDeVeiculos {
         for (Locacao loc : locDAO.listarTodasLocacoes()){
             relatorio = relatorio + loc.toString();
         }
+        System.out.println("relatorio: "+relatorio);
         return relatorio;
     }
     
@@ -353,16 +372,13 @@ public class LocadoraDeVeiculos {
         for (Locacao loc : locDAO.listarTodasLocacoesMesEspecifico(mes)){
             relatorio = relatorio + loc.toString();
         }
+        System.out.println("relatorio: "+relatorio);
         return relatorio;
     }
     
-    public String LucroTotalMesEspecifico(int mes) {
+    public float LucroTotalMesEspecifico(int mes) {
         LocacaoDAO locDAO = new LocacaoDAO();
-        String relatorio = "";
-        for (Locacao loc : locDAO.lucroTotalMesEspecifico(mes)){
-            relatorio = relatorio + loc.toString();
-        }
-        return relatorio;
+        return locDAO.lucroTotalMesEspecifico(mes);
     }
     
     public String ListarTodasLocacoesFinalizadas() {
@@ -371,6 +387,7 @@ public class LocadoraDeVeiculos {
         for (Locacao loc : locDAO.listarTodasLocacoesFinalizadas()){
             relatorio = relatorio + loc.toString();
         }
+        System.out.println("relatorio: "+relatorio);
         return relatorio;
     }
     
@@ -389,6 +406,7 @@ public class LocadoraDeVeiculos {
         for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadasVeiculosNacionais()){
             relatorio = relatorio + loc.toString();
         }
+        System.out.println("relatorio: "+relatorio);
         return relatorio;
     }
     
@@ -398,6 +416,7 @@ public class LocadoraDeVeiculos {
         for (Locacao loc : locDAO.listarTodasLocacoesNaoFinalizadasVeiculosImportados()){
             relatorio = relatorio + loc.toString();
         }
+        System.out.println("relatorio: "+relatorio);
         return relatorio;
     }
     
@@ -419,7 +438,19 @@ public class LocadoraDeVeiculos {
         return relatorio;
     }
     
+    public ArrayList<Seguro> BuscarTodosSeguros(){
+        SeguroDAO segDAO = new SeguroDAO();
+        ArrayList<Seguro> seguros = new ArrayList();
+        for (Seguro seg : segDAO.listarTodosSeguros()){
+            seguros.add(seg);
+        }
+        
+        return seguros;
+    }
     
-    
+    public Veiculo BuscarVeiculoPorCodigo(int codigoVeiculo){
+        VeiculoDAO veicDAO = new VeiculoDAO();
+        Veiculo v = veicDAO.buscarVeiculo(codigoVeiculo);
+        return v;
+   }
 }
-

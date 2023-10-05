@@ -4,6 +4,10 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laís Isabella
@@ -40,7 +44,7 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
         radioAtrasados = new javax.swing.JRadioButton();
         radioCNH = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textListagens = new javax.swing.JTextArea();
+        textAreaListagens = new javax.swing.JTextArea();
         jSeparator2 = new javax.swing.JSeparator();
         buttonListar = new javax.swing.JButton();
         comboCNH = new javax.swing.JComboBox<>();
@@ -55,18 +59,43 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
 
         buttonGroup.add(radioTodos);
         radioTodos.setText("Veículos Cadastrados");
+        radioTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioTodosActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(radioNacionais);
         radioNacionais.setText("Veículos Nacionais");
+        radioNacionais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioNacionaisActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(radioImportados);
         radioImportados.setText("Veículos Importados");
+        radioImportados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioImportadosActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(radioDisponiveis);
         radioDisponiveis.setText("Veículos Disponíveis");
+        radioDisponiveis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioDisponiveisActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(radioLocados);
         radioLocados.setText("Veículos Locados");
+        radioLocados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioLocadosActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(radioAtrasados);
         radioAtrasados.setText("Veículos com devolução atrasada");
@@ -77,16 +106,16 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
         });
 
         buttonGroup.add(radioCNH);
-        radioCNH.setText("Veículos com CNH necessária");
+        radioCNH.setText("Veículos disponíveis com CNH necessária");
         radioCNH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioCNHActionPerformed(evt);
             }
         });
 
-        textListagens.setColumns(20);
-        textListagens.setRows(5);
-        jScrollPane1.setViewportView(textListagens);
+        textAreaListagens.setColumns(20);
+        textAreaListagens.setRows(5);
+        jScrollPane1.setViewportView(textAreaListagens);
 
         buttonListar.setText("LISTAR");
         buttonListar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,20 +142,20 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(radioDisponiveis)
                                     .addComponent(radioImportados)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(radioCNH)
                                         .addGap(18, 18, 18)
-                                        .addComponent(comboCNH, 0, 1, Short.MAX_VALUE))
+                                        .addComponent(comboCNH, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(radioNacionais)
                                     .addComponent(radioTodos)
                                     .addComponent(jLabel2)
                                     .addComponent(radioAtrasados)
                                     .addComponent(radioLocados)
                                     .addComponent(buttonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(21, 21, 21))))
         );
@@ -153,12 +182,12 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(radioLocados)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioCNH)
-                            .addComponent(comboCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radioCNH, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radioAtrasados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(buttonListar)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,10 +199,12 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
 
     private void radioAtrasadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAtrasadosActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioAtrasadosActionPerformed
 
     private void radioCNHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCNHActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
         comboCNH.setVisible(true);
        
         comboCNH.setEnabled(true);
@@ -181,7 +212,85 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
 
     private void buttonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListarActionPerformed
         // TODO add your handling code here:
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
+        if(radioTodos.isSelected()){
+            textAreaListagens.setText(control.ListarTodosVeiculosCadastrados());
+        } else 
+            if(radioNacionais.isSelected()){
+                textAreaListagens.setText(control.ListarTodosVeiculosNacionais());
+            } else 
+                if(radioImportados.isSelected()){
+                    textAreaListagens.setText(control.ListarTodosVeiculosImportados());
+                } else 
+                    if(radioLocados.isSelected()){
+                        textAreaListagens.setText(control.ListarTodosVeiculosAlugados());
+                    } else
+                        if(radioDisponiveis.isSelected()){
+                            textAreaListagens.setText(control.ListarTodosVeiculosDisponiveis());
+                        }
+                        if(radioCNH.isSelected()){
+                           int index = comboCNH.getSelectedIndex();
+                           String cnh = "";
+                           switch(index){
+                               case 0:
+                                   cnh = "A";
+                                   break;
+                                   
+                               case 1:
+                                   cnh = "B";
+                                   break;
+                                   
+                               case 2:
+                                   cnh = "C";
+                                   break;
+                                
+                               case 3:
+                                   cnh = "D";
+                                   break;
+                                   
+                               case 4:
+                                   cnh = "E";
+                                   break;
+                           }
+                           
+                           textAreaListagens.setText(control.ListarVeiculosDisponiveisCNHEspecifica(cnh));
+                           
+                        }else 
+                            if(radioAtrasados.isSelected()){
+                                textAreaListagens.setText(control.ListarTodosVeiculosComAtrasoDevolucao());
+                            } 
+//                            else {
+//                                JOptionPane.showMessageDialog(jFrame, "Selecione algum opção de listagem!");
+//                            }
+        
     }//GEN-LAST:event_buttonListarActionPerformed
+
+    private void radioTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosActionPerformed
+        // TODO add your handling code here:
+        textAreaListagens.setText("");
+    }//GEN-LAST:event_radioTodosActionPerformed
+
+    private void radioNacionaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioNacionaisActionPerformed
+        // TODO add your handling code here:
+        textAreaListagens.setText("");
+    }//GEN-LAST:event_radioNacionaisActionPerformed
+
+    private void radioImportadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioImportadosActionPerformed
+        // TODO add your handling code here:
+        textAreaListagens.setText("");
+    }//GEN-LAST:event_radioImportadosActionPerformed
+
+    private void radioDisponiveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDisponiveisActionPerformed
+        // TODO add your handling code here:
+        textAreaListagens.setText("");
+    }//GEN-LAST:event_radioDisponiveisActionPerformed
+
+    private void radioLocadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioLocadosActionPerformed
+        // TODO add your handling code here:
+        textAreaListagens.setText("");
+    }//GEN-LAST:event_radioLocadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,6 +349,6 @@ public class UIListagensVeiculos extends javax.swing.JDialog {
     private javax.swing.JRadioButton radioLocados;
     private javax.swing.JRadioButton radioNacionais;
     private javax.swing.JRadioButton radioTodos;
-    private javax.swing.JTextArea textListagens;
+    private javax.swing.JTextArea textAreaListagens;
     // End of variables declaration//GEN-END:variables
 }

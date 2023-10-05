@@ -96,19 +96,30 @@ public class FuncionarioDAO {
         
         try {
             stmt = con.prepareStatement("""
-                                        WITH ranked_locacoes AS (
-                                            SELECT
-                                                f.nome AS nome_funcionario,
-                                                MONTH(l.data_locacao) AS mes,
-                                                COUNT(*) AS total_locacoes,
-                                                DENSE_RANK() OVER (PARTITION BY MONTH(l.data_locacao) ORDER BY COUNT(*) DESC) AS ranking
-                                            FROM locacao l
-                                            INNER JOIN funcionario f ON l.idfuncionario = f.idfuncionario
-                                            GROUP BY nome_funcionario, mes
-                                        )
-                                        SELECT nome_funcionario, mes, total_locacoes
-                                        FROM ranked_locacoes
-                                        WHERE ranking = 1;""");
+                            WITH ranked_locacoes AS (
+                                SELECT
+                                    f.idfuncionario,
+                                    f.nome,
+                                    f.cpf,
+                                    f.rg,
+                                    f.dataNascimento,
+                                    f.endereco,
+                                    f.cep,
+                                    f.email,
+                                    f.salario,
+                                    f.pis,
+                                    f.dataAdmissao,
+                                    MONTH(l.data_locacao) AS mes,
+                                    COUNT(*) AS total_locacoes,
+                                    DENSE_RANK() OVER (PARTITION BY MONTH(l.data_locacao) ORDER BY COUNT(*) DESC) AS ranking
+                                FROM locacao l
+                                INNER JOIN funcionario f ON l.idfuncionario = f.idfuncionario
+                                GROUP BY f.idfuncionario, f.nome, f.cpf, f.rg, f.dataNascimento, f.endereco, f.cep, f.email, f.salario, f.pis, f.dataAdmissao, mes
+                            )
+                            SELECT *
+                            FROM ranked_locacoes
+                            WHERE ranking = 1;""");
+
             rs = stmt.executeQuery();
             
             while(rs.next()){

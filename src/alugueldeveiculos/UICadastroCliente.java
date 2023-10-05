@@ -108,8 +108,6 @@ public class UICadastroCliente extends javax.swing.JDialog {
             }
         });
 
-        textNome.setBackground(new java.awt.Color(255, 255, 255));
-        textNome.setForeground(new java.awt.Color(204, 204, 204));
         textNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNomeActionPerformed(evt);

@@ -43,10 +43,10 @@ public class Controlador {
         locadora.addCliente(nome,cpf,rg,dataNasci,endereco,cep,email,categoriaCNH,numeroCNH,validadeCNH,clienteOuro);
     }
 
-    public void addLocacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao,
-                           String dataDevolucao, float valorTotal, String tipoPagamento, ArrayList<Seguro> segurosContratados) {
+    public boolean addLocacao(int codigoCliente, int codigoFuncionario, int codigoVeiculo, String dataLocacao,
+                           String dataDevolucao, String tipoPagamento, int[] segurosContratados) {
         
-        locadora.addLocacao(codigoCliente, codigoFuncionario, codigoVeiculo, dataLocacao, dataDevolucao, valorTotal, tipoPagamento, segurosContratados);
+        return locadora.addLocacao(codigoCliente, codigoFuncionario, codigoVeiculo, dataLocacao, dataDevolucao, tipoPagamento, segurosContratados);
     }
 
     public void addVeiculoNacional(String tipoVeiculo,String nomeModelo, String montadora,
@@ -130,10 +130,14 @@ public class Controlador {
         return locadora.ListarTodasLocacoesMesEspecifico(mes);
     }
     
-    public String LucroTotalMesEspecifico(int mes){
+    public float LucroTotalMesEspecifico(int mes){
         return locadora.LucroTotalMesEspecifico(mes);
     }
-
+    
+    public String ListarTodasLocacoesFinalizadas(){
+        return locadora.ListarTodasLocacoesFinalizadas();
+    }
+    
     public String ListarTodasLocacoesNaoFinalizadas() {
         return locadora.ListarTodasLocacoesNaoFinalizadas();
     }
@@ -157,6 +161,14 @@ public class Controlador {
     
     public String ListarFuncionariosDoMes(){
         return locadora.ListarFuncionariosDoMes();
+    }
+    
+    public ArrayList<Seguro> BuscarTodosSeguros(){
+        return locadora.BuscarTodosSeguros();
+    }
+    
+    public Veiculo BuscarVeiculoPorCodigo(int codigoVeiculo){
+        return locadora.BuscarVeiculoPorCodigo(codigoVeiculo);
     }
 
     

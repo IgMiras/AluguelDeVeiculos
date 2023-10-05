@@ -86,6 +86,11 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
 
         buttonGroup1.add(radioFinalizadas);
         radioFinalizadas.setText("Locações Finalizadas");
+        radioFinalizadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFinalizadasActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(radioNaoFinalizadas);
         radioNaoFinalizadas.setText("Locações não Finalizadas");
@@ -196,24 +201,24 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
         } else
             if(radioLucroMes.isSelected()){
                 String relatorio ="";
-                LocalDate hoje = LocalDate.now();
                 int mes = comboMes.getSelectedIndex()+1;
                 relatorio = control.ListarTodasLocacoesMesEspecifico(mes);
-                relatorio += "\nLucro total do mês: " + control.LucroTotalMesEspecifico(mes);
+                relatorio += "\nLucro total do mês: " + String.valueOf(control.LucroTotalMesEspecifico(mes));
                 textAreaListagens.setText(relatorio);
             } else
                 if(radioFinalizadas.isSelected()){
-                    textAreaListagens.setText(control.ListarTodasLocacoesNaoFinalizadas());
+                    textAreaListagens.setText(control.ListarTodasLocacoesFinalizadas());
                 } else
                     if(radioNaoFinalizadas.isSelected()){
                         int tipo = comboLocacoes.getSelectedIndex();
                         switch(tipo){
                             case 0:
-                                textAreaListagens.setText(control.ListarTodasLocacoes());
+                                textAreaListagens.setText(control.ListarTodasLocacoesNaoFinalizadas());
                                 break;
                                 
                             case 1:
                                 textAreaListagens.setText(control.ListarTodasLocacoesNaoFinalizadasVeiculosNacionais());
+                                break;
                             
                             case 2:
                                 textAreaListagens.setText(control.ListarTodasLocacoesNaoFinalizadasVeiculosImportados());
@@ -229,15 +234,18 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
 
     private void radioTodasLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodasLocacoesActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioTodasLocacoesActionPerformed
 
     private void radioLucroMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioLucroMesActionPerformed
         // TODO add your handling code here:
         comboMes.setEnabled(true);
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioLucroMesActionPerformed
 
     private void radioLocacoesEmAtrasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioLocacoesEmAtrasoActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioLocacoesEmAtrasoActionPerformed
 
     private void comboLocacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLocacoesActionPerformed
@@ -247,7 +255,13 @@ public class UIListagensLocacoes extends javax.swing.JDialog {
     private void radioNaoFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioNaoFinalizadasActionPerformed
         // TODO add your handling code here:
         comboLocacoes.setEnabled(true);
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioNaoFinalizadasActionPerformed
+
+    private void radioFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFinalizadasActionPerformed
+        // TODO add your handling code here:
+        textAreaListagens.setText("");
+    }//GEN-LAST:event_radioFinalizadasActionPerformed
 
     /**
      * @param args the command line arguments

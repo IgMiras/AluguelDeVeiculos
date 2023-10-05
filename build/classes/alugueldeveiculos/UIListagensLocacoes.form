@@ -183,6 +183,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Loca&#xe7;&#xf5;es Finalizadas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioFinalizadasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioNaoFinalizadas">
       <Properties>

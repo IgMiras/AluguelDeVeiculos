@@ -4,6 +4,10 @@
  */
 package alugueldeveiculos;
 
+import control.Controlador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laís Isabella
@@ -32,7 +36,7 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
         textMontadora = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        textCategoriaVeiculo = new javax.swing.JTextField();
+        textCategoria = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -46,14 +50,11 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         textCategoriaCNHVeiculo = new javax.swing.JTextField();
-        textAnoFabricaco = new javax.swing.JTextField();
+        textAnoFabricacao = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         textTaxaImpostoEstadual = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         textTaxaImpostoFederal = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        buttonAlugadoSim = new javax.swing.JRadioButton();
-        buttonAlugadoNao = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,9 +76,9 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel5.setText("Placa");
 
-        textCategoriaVeiculo.addActionListener(new java.awt.event.ActionListener() {
+        textCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCategoriaVeiculoActionPerformed(evt);
+                textCategoriaActionPerformed(evt);
             }
         });
 
@@ -111,8 +112,6 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
         jLabel6.setText("Valor Fipe");
 
-        textNomeModelo.setBackground(new java.awt.Color(255, 255, 255));
-        textNomeModelo.setForeground(new java.awt.Color(204, 204, 204));
         textNomeModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNomeModeloActionPerformed(evt);
@@ -144,9 +143,9 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
             }
         });
 
-        textAnoFabricaco.addActionListener(new java.awt.event.ActionListener() {
+        textAnoFabricacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textAnoFabricacoActionPerformed(evt);
+                textAnoFabricacaoActionPerformed(evt);
             }
         });
 
@@ -160,23 +159,12 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
         });
 
         jLabel20.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Taxa Imposto Federal");
 
         textTaxaImpostoFederal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textTaxaImpostoFederalActionPerformed(evt);
-            }
-        });
-
-        jLabel21.setFont(new java.awt.Font("Source Sans Pro Light", 0, 14)); // NOI18N
-        jLabel21.setText("Alugado");
-
-        buttonAlugadoSim.setText("Sim");
-
-        buttonAlugadoNao.setText("Não");
-        buttonAlugadoNao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAlugadoNaoActionPerformed(evt);
             }
         });
 
@@ -196,7 +184,7 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(jLabel2)
                                             .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(textAnoFabricaco, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(textAnoFabricacao, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addGap(37, 37, 37))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,32 +200,24 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
                             .addComponent(jLabel12)
                             .addComponent(textMontadora)
                             .addComponent(jLabel13)
-                            .addComponent(textCategoriaVeiculo, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap(20, Short.MAX_VALUE))
+                            .addComponent(textCategoria, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(textValorFipe, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textCategoriaCNHVeiculo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                .addComponent(textTaxaImpostoFederal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(textCategoriaCNHVeiculo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                             .addComponent(jLabel7))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textValorDiaria)
-                            .addComponent(textTaxaImpostoEstadual, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel21)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(buttonAlugadoSim)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(buttonAlugadoNao)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(33, 33, 33))))
+                                    .addComponent(jLabel17))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE))
+                            .addComponent(textValorDiaria)
+                            .addComponent(textTaxaImpostoEstadual))))
+                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -246,7 +226,15 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel20)
+                .addGap(130, 130, 130))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(textTaxaImpostoFederal, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +259,7 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textAnoFabricaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textAnoFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textAnoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,7 +267,7 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textCategoriaVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -301,17 +289,9 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textTaxaImpostoEstadual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textTaxaImpostoFederal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonAlugadoSim)
-                            .addComponent(buttonAlugadoNao))))
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textTaxaImpostoFederal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonSalvar)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -324,9 +304,9 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textMontadoraActionPerformed
 
-    private void textCategoriaVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCategoriaVeiculoActionPerformed
+    private void textCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCategoriaVeiculoActionPerformed
+    }//GEN-LAST:event_textCategoriaActionPerformed
 
     private void textAnoModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textAnoModeloActionPerformed
         // TODO add your handling code here:
@@ -351,7 +331,25 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
         
+        
+        JFrame jFrame = new JFrame();
+        Controlador control = new Controlador();
+        
         String tipoVeiculo = "importado";
+        String nomeModelo = textNomeModelo.getText();
+        String montadora = textMontadora.getText();
+        int anoFabricação = Integer.parseInt(textAnoFabricacao.getText());
+        int anoModelo = Integer.parseInt(textAnoModelo.getText());
+        String placa = textPlaca.getText();
+        String categoria = textCategoria.getText();
+        float valorFipe = Integer.parseInt(textValorFipe.getText());
+        float valorDiaria = Float.parseFloat(textValorDiaria.getText());
+        String categoriaCnh = textCategoriaCNHVeiculo.getText();
+        float taxaImpostoEstadual = Float.parseFloat(textTaxaImpostoEstadual.getText());
+        float taxaImpostoFederal = Float.parseFloat(textTaxaImpostoEstadual.getText());
+        
+        control.addVeiculoImportado(tipoVeiculo, nomeModelo, montadora, anoFabricação, anoModelo, placa, categoria, valorFipe, valorDiaria, categoriaCnh, taxaImpostoEstadual, taxaImpostoFederal);
+        JOptionPane.showMessageDialog(jFrame, "Veículo Importado cadastrado com sucesso!");
         
         
     }//GEN-LAST:event_buttonSalvarActionPerformed
@@ -360,9 +358,9 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textCategoriaCNHVeiculoActionPerformed
 
-    private void textAnoFabricacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textAnoFabricacoActionPerformed
+    private void textAnoFabricacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textAnoFabricacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textAnoFabricacoActionPerformed
+    }//GEN-LAST:event_textAnoFabricacaoActionPerformed
 
     private void textTaxaImpostoEstadualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTaxaImpostoEstadualActionPerformed
         // TODO add your handling code here:
@@ -371,10 +369,6 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
     private void textTaxaImpostoFederalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTaxaImpostoFederalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textTaxaImpostoFederalActionPerformed
-
-    private void buttonAlugadoNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlugadoNaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonAlugadoNaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -420,8 +414,6 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton buttonAlugadoNao;
-    private javax.swing.JRadioButton buttonAlugadoSim;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -430,16 +422,15 @@ public class UICadastroVeiculoImportado extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField textAnoFabricaco;
+    private javax.swing.JTextField textAnoFabricacao;
     private javax.swing.JTextField textAnoModelo;
+    private javax.swing.JTextField textCategoria;
     private javax.swing.JTextField textCategoriaCNHVeiculo;
-    private javax.swing.JTextField textCategoriaVeiculo;
     private javax.swing.JTextField textMontadora;
     private javax.swing.JTextField textNomeModelo;
     private javax.swing.JTextField textPlaca;

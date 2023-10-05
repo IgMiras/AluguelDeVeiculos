@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -31,12 +33,13 @@ public class Locacao {
     
     public Locacao(){}
     
-    public Locacao(int codigoCliente, int codigoFuncionario, Veiculo veiculo, String dataLocacao, String dataDevolucao, float valorTotal, String tipoPagamento, ArrayList<Seguro> segurosContratados) {
+    public Locacao(int codigoCliente, int codigoFuncionario, Veiculo veiculo, String dataLocacao, String dataDevolucao, String tipoPagamento, ArrayList<Seguro> segurosContratados) {
         this.codigoLocacao = codigoLocacaoCounter;
         codigoLocacaoCounter++; // Incrementa o contador para a proxima Locacao
         this.codigoCliente = codigoCliente;
         this.codigoFuncionario = codigoFuncionario;
         this.veiculo = veiculo;
+        this.veiculo.setAlugado(true);
         LocalDate dataLocacaoAux = LocalDate.parse(dataLocacao, formatter);
         this.dataLocacao = dataLocacaoAux;
         LocalDate dataDevolucaoAux = LocalDate.parse(dataDevolucao, formatter);
@@ -156,11 +159,10 @@ public class Locacao {
 
     @Override
     public String toString() {
-        return "Locacao{" + "formatter=" + formatter + ", codigoLocacao=" + codigoLocacao +
-                ", codigoCliente=" + codigoCliente + ", codigoFuncionario=" + codigoFuncionario +
-                ", veiculo=" + veiculo.toString() + ", dataLocacao=" + dataLocacao +
-                ", dataDevolucao=" + dataDevolucao + ", valorTotal=" + valorTotal + ", tipoPagamento=" + tipoPagamento +
-                ", segurosContratados=" + segurosContratados + ", finalizada=" + finalizada + '}';
+        return "Locacao\n" + "Codigo da Locacao: " + this.codigoLocacao + "\nCodigo Cliente: " + this.codigoCliente + "\nCodigo funcionário: " + this.codigoFuncionario + 
+                "\nInformações do veículo Locado: " + this.veiculo.toString() + "\nData da locação: " + this.dataLocacao + "\nData de Devolução: " + this.dataDevolucao +
+                "\nValor total: R$" + this.valorTotal + "\nTipo de pagamento: " + this.tipoPagamento + "Finalizada (true = sim e false = nao): " + this.finalizada +
+                "\nSEGUROS CONTRATADOS: \n" + this.segurosContratados.toString() + "\n\n";
     }
     
     

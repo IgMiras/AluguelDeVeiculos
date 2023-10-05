@@ -57,6 +57,11 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
 
         buttonGroup1.add(radioFuncionarioDoMes);
         radioFuncionarioDoMes.setText("Funcionários do mês ");
+        radioFuncionarioDoMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFuncionarioDoMesActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel2.setText("Selecione qual relatório você deseja listar:");
@@ -182,11 +187,18 @@ public class UIListagensFuncionarios extends javax.swing.JDialog {
 
     private void radioTodosSegurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosSegurosActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioTodosSegurosActionPerformed
 
     private void radioFuncionariosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFuncionariosCadastradosActionPerformed
         // TODO add your handling code here:
+        textAreaListagens.setText("");
     }//GEN-LAST:event_radioFuncionariosCadastradosActionPerformed
+
+    private void radioFuncionarioDoMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFuncionarioDoMesActionPerformed
+        // TODO add your handling code here:
+        textAreaListagens.setText("");
+    }//GEN-LAST:event_radioFuncionarioDoMesActionPerformed
 
     /**
      * @param args the command line arguments

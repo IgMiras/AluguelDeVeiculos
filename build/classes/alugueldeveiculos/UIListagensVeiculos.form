@@ -39,13 +39,13 @@
                           <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                           <Component id="jSeparator1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="radioDisponiveis" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="radioImportados" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="radioCNH" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="comboCNH" pref="0" max="32767" attributes="0"/>
+                                      <Component id="comboCNH" min="-2" pref="52" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="radioNacionais" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="radioTodos" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
                                   <Component id="radioLocados" min="-2" max="-2" attributes="0"/>
                                   <Component id="buttonListar" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="34" max="32767" attributes="0"/>
+                              <EmptySpace pref="26" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="299" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -87,13 +87,13 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="radioLocados" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="radioCNH" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboCNH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="comboCNH" min="-2" max="-2" attributes="0"/>
+                          <Component id="radioCNH" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="radioAtrasados" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                       <Component id="buttonListar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -130,6 +130,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ve&#xed;culos Cadastrados"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioTodosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioNacionais">
       <Properties>
@@ -138,6 +141,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ve&#xed;culos Nacionais"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioNacionaisActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioImportados">
       <Properties>
@@ -146,6 +152,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ve&#xed;culos Importados"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioImportadosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioDisponiveis">
       <Properties>
@@ -154,6 +163,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ve&#xed;culos Dispon&#xed;veis"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioDisponiveisActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioLocados">
       <Properties>
@@ -162,6 +174,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ve&#xed;culos Locados"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioLocadosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="radioAtrasados">
       <Properties>
@@ -179,7 +194,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ve&#xed;culos com CNH necess&#xe1;ria"/>
+        <Property name="text" type="java.lang.String" value="Ve&#xed;culos dispon&#xed;veis com CNH necess&#xe1;ria"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioCNHActionPerformed"/>
@@ -192,7 +207,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="textListagens">
+        <Component class="javax.swing.JTextArea" name="textAreaListagens">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
